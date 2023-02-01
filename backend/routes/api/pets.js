@@ -1,0 +1,101 @@
+const express = require("express");
+const router = express.Router();
+
+const Pet = require("../../models/petModel");
+
+router.get("/test", (req, res) => {
+  res.send("Pet route testing.");
+});
+
+// // Get all pets.
+// router.get("/", (req, res) => {
+//   const query = req.query;
+//   console.log(query);
+//   Pet.find(query)
+//     .then((pets) => res.status(200).json(pets))
+//     .catch((err) =>
+//       res.status(404).json({ noPetsFound: "No pets were found." })
+//     );
+// });
+
+//Filter pets.
+router.get("/", async (req, res) => {
+  //Build query.
+
+  //Basic filtering.
+  const queryObject = { ...req.query };
+
+  const excludedFields = ["page", "sort", "limit", "fields"];
+  excludedFields.forEach((field) => {
+    delete queryObject[field];
+  });
+
+  //Advanced filter for greater than and less than queries.
+  let queryString = JSON.stringify(queryObject);
+
+  queryString = queryString.replace(
+    /\b(gt|gte|lt|lte)\b/g,
+    (match) => `$${match}`
+  );
+
+  let query = Pet.find(JSON.parse(queryString));
+
+  // Sort results.
+  if (req.query.sort) {
+    query = query.sort(req.query.sort);
+  }
+
+  //Pagination of results.
+  const page = req.query.page * 1 || 1;
+  const limit = req.query.limit * 1 || 6;
+  const skip = (page - 1) * limit;
+
+  query = query.skip(skip).limit(limit);
+
+  if (req.query.page) {
+    const totalPets = await Pet.countDocuments;
+    if (skip > totalPets) throw new Error("this page does not exist");
+  }
+
+  //Execute query
+  const pets = await query;
+
+  //Send Response
+  res.status(200).json(pets);
+  // .catch((err) =>
+  //   res.status(404).json({ noPetsFound: "No pets were found." })
+  // );
+});
+
+//Get pet by id.
+router.get("/:id", (req, res) => {
+  Pet.findById(req.params.id)
+    .then((pet) => res.status(200).json(pet))
+    .catch((err) => req.status(404).json({ noPetFound: "No pet was found." }));
+});
+
+//Add/save a pet.
+// router.post("/", (req, res) => {
+//   Pet.create(req.body)
+//     .then(console.log(req.body))
+//     .then((pet) => res.json({ msg: "Pet was added successfully." }))
+//     .catch((err) => res.status(400).json({ error: "Unable to add pet." }));
+// });
+
+//Update a pet.
+// router.put("/:id", (req, res) => {
+//   Pet.findByIdAndUpdate(req.params.id, req.body)
+//     .then((pet) => res.status(200).json({ msg: "Updated successfully." }))
+//     .catch((err) =>
+//       res.status(400).json({ error: "Unable to update the database." })
+//     );
+// });
+
+//Delete a pet.
+// router.delete("/:id", (req, res) => {
+//   Pet.findByIdAndRemove(req.params.id, req.body)
+//     .then((pet) => res.status(200).json({ msg: "Pet deleted successfully." }))
+//     .catch((err) => res.status(404).json({ error: "No such pet to delete." }));
+// });
+
+module.exports = router;

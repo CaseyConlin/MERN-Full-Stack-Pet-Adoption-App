@@ -1,0 +1,22 @@
+{
+  "name": "petconnector-backend",
+  "version": "1.0.0",
+  "description": "Server and backend management for pet adoption app.",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Casey Conlin",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "config": "^3.3.9",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
