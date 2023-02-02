@@ -13,7 +13,7 @@ export const PetPage = () => {
       <div className="xl:w-2/6 lg:w-2/5 w-80 md:block hidden">
         <img
           className="w-full"
-          src={`http://localhost:8000/uploads/${pet.image}`}
+          src={`/uploads/${pet.image}`}
           alt={pet.species + " for adoption."}
         />
       </div>

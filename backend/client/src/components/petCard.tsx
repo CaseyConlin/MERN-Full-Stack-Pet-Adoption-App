@@ -11,7 +11,7 @@ export const PetCard = ({ pets }: { pets: Pet[] }) => {
           <Link to={`/pet/${pet._id}`}>
             <img
               className="rounded-t-lg"
-              src={`http://localhost:8000/uploads/${pet.image}`}
+              src={`/uploads/${pet.image}`}
               alt={pet.species + " for adoption."}
             />
           </Link>
