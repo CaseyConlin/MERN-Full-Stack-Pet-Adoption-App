@@ -11,7 +11,7 @@ export const fetchPets = async ({
   const query = window.location.search;
   console.log(query);
 
-  const res = await fetch(`http://localhost:8000/api/v1/pets${query}`);
+  const res = await fetch(`/api/v1/pets${query}`);
   if (!res.ok) {
     throw json({ message: "No pets available." }, { status: 500 });
   }
@@ -19,7 +19,7 @@ export const fetchPets = async ({
 };
 
 export const searchPets = async (query?: string) => {
-  const res = await fetch(`http://localhost:8000/api/v1/pets/${query}`);
+  const res = await fetch(`/api/v1/pets/${query}`);
   const data = await res.json();
   return data;
 };
@@ -36,7 +36,7 @@ export const fetchPet = async ({
   console.log(id);
   console.log(params);
   console.log(request);
-  const res = await fetch(`http://localhost:8000/api/v1/pets/${id}`);
+  const res = await fetch(`/api/v1/pets/${id}`);
   console.log(res);
 
   return res;
