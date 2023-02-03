@@ -48,7 +48,7 @@ export const PetCard = ({ pets }: { pets: Pet[] }) => {
             <div className="flex items-center justify-start mb-2">
               <Link
                 to={`/pets/?species=${pet.species}`}
-                className="inline-flex items-center mr-3 px-3 py-2 text-sm font-medium text-center text-white bg-slate-700 rounded-lg hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="inline-flex items-center mr-3 px-3 py-2 text-sm font-medium text-center text-white bg-slate-500 rounded-lg hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 {"More " + multipleSpeciesStringConverter(pet.species)}
                 <svg
@@ -67,7 +67,7 @@ export const PetCard = ({ pets }: { pets: Pet[] }) => {
               </Link>
               <Link
                 to={`/pet/${pet._id}`}
-                className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-slate-700 rounded-lg hover:bg-slate-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 {"Meet " + pet.name}
                 <svg

@@ -12,7 +12,7 @@ export const PetPage = () => {
     <div className="md:flex items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
       <div className="xl:w-2/6 lg:w-2/5 w-80 md:block hidden">
         <img
-          className="w-full"
+          className="w-full rounded-lg"
           src={`/uploads/${pet.image}`}
           alt={pet.species + " for adoption."}
         />
@@ -59,14 +59,15 @@ export const PetPage = () => {
 						focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800
 						text-base
 						flex
+            rounded-lg
 						items-center
 						justify-center
 						leading-none
 						text-white
-						bg-gray-800
+						bg-slate-700
 						w-full
 						py-4
-						hover:bg-gray-700
+						hover:bg-gray-900
 					"
         >
           <svg
