@@ -1,5 +1,5 @@
-import { Form } from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
+import { Form, useSearchParams } from "react-router-dom";
+import { useRef } from "react";
 
 export const SearchBar = ({
   speciesQuery,
@@ -10,13 +10,12 @@ export const SearchBar = ({
   sortQuery?: React.MouseEventHandler;
   clearQuery?: React.MouseEventHandler;
 }) => {
-  // const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const ref = useRef<HTMLButtonElement>(null);
 
-  // if (searchParams.getAll("species").length !== 0) {
-  //   let activeSpecies = searchParams.getAll("species");
-  //   activeSpecies.forEach();
-  //   console.log(activeSpecies);
-  // }
+  const styleByQuery = (elementName: string, elementId: string) => {
+    return searchParams.getAll(elementName).includes(elementId);
+  };
 
   return (
     <Form id="search-form" role="search">
@@ -30,11 +29,17 @@ export const SearchBar = ({
             role="group"
           >
             <button
+              ref={ref}
               id="cat"
               onClick={speciesQuery}
               name="species"
               type="button"
-              className="inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+              className={`inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 border border-gray-200 hover:bg-slate-400 
+              ${
+                styleByQuery("species", "cat")
+                  ? "bg-slate-700 text-white hover:bg-slate-600"
+                  : "bg-slate-100 text-black hover:bg-slate-200"
+              }`}
             >
               <svg
                 aria-hidden="true"
@@ -52,15 +57,21 @@ export const SearchBar = ({
               Cats
             </button>
             <button
+              ref={ref}
               id="dog"
               onClick={speciesQuery}
               name="species"
               type="button"
-              className="inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+              className={`inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 border border-gray-200 hover:bg-slate-400 
+              ${
+                styleByQuery("species", "dog")
+                  ? "bg-slate-700 text-white hover:bg-slate-600"
+                  : "bg-slate-100 text-black hover:bg-slate-200"
+              }`}
             >
               <svg
                 aria-hidden="true"
-                className="w-14 h-14 mr-2 fill-current"
+                className="w-14 h-12 mr-2 fill-current"
                 viewBox="0 0 700 700"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -72,11 +83,17 @@ export const SearchBar = ({
               Dogs
             </button>
             <button
+              ref={ref}
               id="bunny"
               onClick={speciesQuery}
               name="species"
               type="button"
-              className="inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+              className={`inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 border border-gray-200 hover:bg-slate-400 
+              ${
+                styleByQuery("species", "bunny")
+                  ? "bg-slate-700 text-white hover:bg-slate-600"
+                  : "bg-slate-100 text-black hover:bg-slate-200"
+              }`}
             >
               <svg
                 aria-hidden="true"
@@ -90,11 +107,17 @@ export const SearchBar = ({
               Bunnies
             </button>
             <button
+              ref={ref}
               id="chicken"
               onClick={speciesQuery}
               name="species"
               type="button"
-              className="inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+              className={`inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 border border-gray-200 hover:bg-slate-400 
+              ${
+                styleByQuery("species", "chicken")
+                  ? "bg-slate-700 text-white hover:bg-slate-600"
+                  : "bg-slate-100 text-black hover:bg-slate-200"
+              }`}
             >
               <svg
                 aria-hidden="true"
@@ -112,11 +135,17 @@ export const SearchBar = ({
               Chickens
             </button>
             <button
+              ref={ref}
               onClick={speciesQuery}
               id="rat"
               name="species"
               type="button"
-              className="inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+              className={`inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 border border-gray-200 hover:bg-slate-400 
+              ${
+                styleByQuery("species", "rat")
+                  ? "bg-slate-700 text-white hover:bg-slate-600"
+                  : "bg-slate-100 text-black hover:bg-slate-200"
+              }`}
             >
               <svg
                 aria-hidden="true"
@@ -148,7 +177,12 @@ export const SearchBar = ({
               id="age"
               name="sort"
               value="age"
-              className="px-4 py-0 w-34 h-10 text-sm font-medium text-gray-900 bg-white rounded-l-lg border-l border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+              className={`px-4 py-0 w-34 h-10 text-sm font-medium rounded-l-lg border-l border-t border-b text-gray-900 border border-gray-200  
+              ${
+                styleByQuery("sort", "age")
+                  ? "bg-slate-700 text-white hover:bg-slate-600"
+                  : "bg-slate-100 text-black hover:bg-slate-200"
+              }`}
             >
               Age
             </button>
@@ -158,7 +192,12 @@ export const SearchBar = ({
               id="fee"
               name="sort"
               value="fee"
-              className="px-4 py-0 w-34 h-10 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+              className={`px-4 py-0 w-34 h-10 text-sm font-medium border-r border-t border-b text-gray-900 border border-gray-200  
+              ${
+                styleByQuery("sort", "fee")
+                  ? "bg-slate-700 text-white hover:bg-slate-600"
+                  : "bg-slate-100 text-black hover:bg-slate-200"
+              }`}
             >
               Fee
             </button>
@@ -168,7 +207,12 @@ export const SearchBar = ({
               id="dateAddedToSite"
               name="sort"
               value="days"
-              className="px-4 py-0 w-34 h-10 text-sm font-medium text-gray-900 bg-white rounded-r-lg border-r border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+              className={`px-4 py-0 w-34 h-10 text-sm font-medium rounded-r-lg border-r border-t border-b text-gray-900 border border-gray-200  
+                ${
+                  styleByQuery("sort", "dateAddedToSite")
+                    ? "bg-slate-700 text-white hover:bg-slate-600"
+                    : "bg-slate-100 text-black hover:bg-slate-200"
+                }`}
             >
               Days on Site
             </button>
@@ -179,7 +223,7 @@ export const SearchBar = ({
       <button
         onClick={clearQuery}
         type="submit"
-        className=" flex my-0 mx-auto px-4 py-2 w-34 h-10 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+        className=" flex my-0 mx-auto px-4 py-2 w-34 h-10 text-sm font-medium border border-gray-200 rounded-lg bg-slate-100 text-black hover:bg-slate-200 hover:text-black active:bg-slate-700 active:text-white"
       >
         Clear Search
       </button>

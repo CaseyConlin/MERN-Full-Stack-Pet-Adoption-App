@@ -1,12 +1,10 @@
 import queryString from "query-string";
-import { useState } from "react";
 import { useLoaderData, useSearchParams } from "react-router-dom";
 import { SearchBar } from "./searchBar";
 import { PetCard } from "./petCard";
 import { useEffect } from "react";
 
 export const PetSearchPage: Function = () => {
-  const [paramActive, setParamActive] = useState(false);
   let [searchParams, setSearchParams] = useSearchParams();
 
   // const handleClick = () => {
