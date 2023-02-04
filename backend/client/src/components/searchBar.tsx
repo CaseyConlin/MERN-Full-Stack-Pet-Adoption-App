@@ -22,11 +22,11 @@ export const SearchBar = ({
     <Form id="search-form" role="search">
       <fieldset>
         <div className="flex flex-col">
-          <div className="text-center items-center px-2 py-2 text-lg lg:text-2xl font-medium text-gray-900 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+          <div className="text-center items-center px-2 py-2 text-lg lg:text-2xl font-medium text-gray-900">
             Show Me:
           </div>
           <div
-            className="flex flex-row flex-wrap gap-0 content-center justify-center"
+            className="flex flex-row flex-wrap gap-x-1 gap-y-2 content-center justify-center"
             role="group"
           >
             <button
@@ -34,7 +34,7 @@ export const SearchBar = ({
               onClick={speciesQuery}
               name="species"
               type="button"
-              className="inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+              className="inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
             >
               <svg
                 aria-hidden="true"
@@ -56,7 +56,7 @@ export const SearchBar = ({
               onClick={speciesQuery}
               name="species"
               type="button"
-              className="inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+              className="inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
             >
               <svg
                 aria-hidden="true"
@@ -76,7 +76,7 @@ export const SearchBar = ({
               onClick={speciesQuery}
               name="species"
               type="button"
-              className="inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+              className="inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
             >
               <svg
                 aria-hidden="true"
@@ -94,7 +94,7 @@ export const SearchBar = ({
               onClick={speciesQuery}
               name="species"
               type="button"
-              className="inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+              className="inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
             >
               <svg
                 aria-hidden="true"
@@ -116,7 +116,7 @@ export const SearchBar = ({
               id="rat"
               name="species"
               type="button"
-              className="inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+              className="inline-flex w-2/5 h-12 min-w-min lg:m-2 lg:w-1/6 items-center justify-center content-center px-0 py-0  text-sm font-medium rounded-lg text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
             >
               <svg
                 aria-hidden="true"
@@ -137,21 +137,18 @@ export const SearchBar = ({
       </fieldset>
 
       <fieldset className="flex flex-row my-3 mx-auto" role="group">
-        <div className="flex flex-row my-3 mx-auto">
-          <div className=" inline-flex h-10 items-center px-2 py-3 text-lg lg:text=2xl font-medium text-gray-900 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+        <div className="flex flex-row mx-auto">
+          <div className=" inline-flex h-10 items-center px-2 py-3 text-lg lg:text-xl font-medium text-gray-900">
             Sort By:
           </div>
-          <div
-            className="inline-flex rounded-md flex-none shadow-sm"
-            role="group"
-          >
+          <div className="inline-flex rounded-md shadow-sm" role="group">
             <button
               onClick={sortQuery}
               type="button"
               id="age"
               name="sort"
               value="age"
-              className="px-4 py-2 w-34 h-10 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+              className="px-4 py-0 w-34 h-10 text-sm font-medium text-gray-900 bg-white rounded-l-lg border-l border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
             >
               Age
             </button>
@@ -161,7 +158,7 @@ export const SearchBar = ({
               id="fee"
               name="sort"
               value="fee"
-              className="px-4 py-0 w-34 h-10 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+              className="px-4 py-0 w-34 h-10 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
             >
               Fee
             </button>
@@ -171,7 +168,7 @@ export const SearchBar = ({
               id="dateAddedToSite"
               name="sort"
               value="days"
-              className="px-4 py-2 w-34 h-10 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+              className="px-4 py-0 w-34 h-10 text-sm font-medium text-gray-900 bg-white rounded-r-lg border-r border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
             >
               Days on Site
             </button>
@@ -182,7 +179,7 @@ export const SearchBar = ({
       <button
         onClick={clearQuery}
         type="submit"
-        className=" flex mx-auto px-4 py-2 w-34 h-10 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+        className=" flex my-0 mx-auto px-4 py-2 w-34 h-10 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
       >
         Clear Search
       </button>
