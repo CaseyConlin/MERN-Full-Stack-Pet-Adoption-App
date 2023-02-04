@@ -6,7 +6,7 @@ export const PetCard = ({ pets }: { pets: Pet[] }) => {
       {pets.map((pet: Pet) => (
         <li
           key={pet._id}
-          className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          className="max-w-sm md:w-2/5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
           <Link to={`/pet/${pet._id}`}>
             <img

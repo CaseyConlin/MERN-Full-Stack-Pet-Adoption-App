@@ -1,12 +1,17 @@
 import queryString from "query-string";
+import { useState } from "react";
 import { useLoaderData, useSearchParams } from "react-router-dom";
 import { SearchBar } from "./searchBar";
 import { PetCard } from "./petCard";
 import { useEffect } from "react";
 
 export const PetSearchPage: Function = () => {
+  const [paramActive, setParamActive] = useState(false);
   let [searchParams, setSearchParams] = useSearchParams();
 
+  // const handleClick = () => {
+  //   clicked ? setClicked('') : setClicked('base-state click-state');
+  // };
   const pets = useLoaderData() as Pet[];
 
   useEffect(() => {
@@ -70,7 +75,7 @@ export const PetSearchPage: Function = () => {
         sortQuery={sortQuery}
         speciesQuery={speciesQuery}
       />
-      <ul className="flex flex-row flex-wrap justify-between gap-x-2 gap-y-7 my-5">
+      <ul className="flex flex-row flex-wrap justify-evenly gap-x-1 gap-y-7 my-5">
         <PetCard pets={pets} />
       </ul>
     </div>
