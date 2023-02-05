@@ -24,6 +24,7 @@ export const PetSearchPage: Function = () => {
   const page: number = Number(searchParams.get("page") || 1);
   const pages: number = Number(Math.ceil(resultsCount / limit));
   const pageList = [...Array(pages + 1).keys()].slice(1);
+  console.log(pageList);
   const next = page < pages ? page + 1 : page;
   const previous = page > 1 ? page - 1 : page;
 

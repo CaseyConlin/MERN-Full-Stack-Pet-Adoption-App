@@ -36,7 +36,6 @@ router.get("/", async (req, res) => {
   }
 
   const totalQueryPets = await Pet.countDocuments(query);
-  console.log(totalQueryPets);
 
   //Pagination of results.
   const page = req.query.page * 1 || 1;
