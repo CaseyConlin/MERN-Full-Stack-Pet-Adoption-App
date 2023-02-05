@@ -22,10 +22,11 @@ export const PetSearchPage: Function = () => {
   const resultsCount = pets.totalPetsResults;
   const limit: number = Number(searchParams.get("limit") || 6);
   const page: number = Number(searchParams.get("page") || 1);
-  const pages: number = Number(Math.ceil(resultsCount / limit));
-  let pageList = [];
-  pageList = [...Array(pages + 1).keys()].slice(1);
-  console.log(pageList);
+  const pages: number = Math.trunc(Math.ceil(resultsCount / limit));
+  let pageList: number[] = [];
+  if (resultsCount) {
+    pageList = [...Array(pages + 1).keys()].slice(1);
+  }
   const next = page < pages ? page + 1 : page;
   const previous = page > 1 ? page - 1 : page;
 
