@@ -10,14 +10,6 @@ export const PetSearchPage: Function = () => {
 
   const pets = useLoaderData() as PetData;
 
-  const resultsCount = pets.totalPetsResults;
-  const limit: number = Number(searchParams.get("limit") || 6);
-  const page: number = Number(searchParams.get("page") || 1);
-  const pages: number = Math.ceil(resultsCount / limit);
-  const pageList = [...Array(pages + 1).keys()].slice(1);
-  const next = page < pages ? page + 1 : page;
-  const previous = page > 1 ? page - 1 : page;
-
   useEffect(() => {
     setSearchParams(searchParams);
   }, [searchParams, setSearchParams]);
@@ -25,6 +17,15 @@ export const PetSearchPage: Function = () => {
   const clearQuery: React.MouseEventHandler = () => {
     return setSearchParams({});
   };
+
+  //Pagination data.
+  const resultsCount = pets.totalPetsResults;
+  const limit: number = Number(searchParams.get("limit") || 6);
+  const page: number = Number(searchParams.get("page") || 1);
+  const pages: number = Math.ceil(resultsCount / limit);
+  const pageList = [...Array(pages + 1).keys()].slice(1);
+  const next = page < pages ? page + 1 : page;
+  const previous = page > 1 ? page - 1 : page;
 
   const paginationQuery = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { name: key, id: value } = e.currentTarget as HTMLButtonElement;
