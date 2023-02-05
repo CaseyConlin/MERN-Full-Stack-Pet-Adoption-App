@@ -3,7 +3,7 @@ import { multipleSpeciesStringConverter } from "./helpers";
 export const PetCard = ({ pets }: { pets: Pet[] }) => {
   return (
     <>
-      {pets.map((pet: Pet) => (
+      {pets.map((pet) => (
         <li
           key={pet._id}
           className="max-w-sm md:w-2/5 bg-white border border-gray-200 rounded-lg shadow"
