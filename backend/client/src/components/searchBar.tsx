@@ -1,17 +1,15 @@
 import { Form, useSearchParams } from "react-router-dom";
-import { useRef } from "react";
 
 export const SearchBar = ({
   speciesQuery,
   sortQuery,
   clearQuery,
 }: {
-  speciesQuery?: React.MouseEventHandler;
-  sortQuery?: React.MouseEventHandler;
-  clearQuery?: React.MouseEventHandler;
+  speciesQuery: React.MouseEventHandler;
+  sortQuery: React.MouseEventHandler;
+  clearQuery: React.MouseEventHandler;
 }) => {
   const [searchParams] = useSearchParams();
-  const ref = useRef<HTMLButtonElement>(null);
 
   const styleByQuery = (elementName: string, elementId: string) => {
     return searchParams.getAll(elementName).includes(elementId);
@@ -29,7 +27,6 @@ export const SearchBar = ({
             role="group"
           >
             <button
-              ref={ref}
               id="cat"
               onClick={speciesQuery}
               name="species"
@@ -57,7 +54,6 @@ export const SearchBar = ({
               Cats
             </button>
             <button
-              ref={ref}
               id="dog"
               onClick={speciesQuery}
               name="species"
@@ -83,7 +79,6 @@ export const SearchBar = ({
               Dogs
             </button>
             <button
-              ref={ref}
               id="bunny"
               onClick={speciesQuery}
               name="species"
@@ -107,7 +102,6 @@ export const SearchBar = ({
               Bunnies
             </button>
             <button
-              ref={ref}
               id="chicken"
               onClick={speciesQuery}
               name="species"
@@ -135,7 +129,6 @@ export const SearchBar = ({
               Chickens
             </button>
             <button
-              ref={ref}
               onClick={speciesQuery}
               id="rat"
               name="species"

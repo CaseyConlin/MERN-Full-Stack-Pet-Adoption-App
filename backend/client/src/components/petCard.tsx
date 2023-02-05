@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { multipleSpeciesStringConverter } from "./helpers";
 export const PetCard = ({ pets }: { pets: Pet[] }) => {
+  console.log(pets);
   return (
     <>
       {pets.map((pet: Pet) => (

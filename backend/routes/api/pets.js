@@ -1,4 +1,5 @@
 const express = require("express");
+const { countDocuments } = require("../../models/petModel");
 const router = express.Router();
 
 const Pet = require("../../models/petModel");
@@ -7,25 +8,14 @@ router.get("/test", (req, res) => {
   res.send("Pet route testing.");
 });
 
-// // Get all pets.
-// router.get("/", (req, res) => {
-//   const query = req.query;
-//   console.log(query);
-//   Pet.find(query)
-//     .then((pets) => res.status(200).json(pets))
-//     .catch((err) =>
-//       res.status(404).json({ noPetsFound: "No pets were found." })
-//     );
-// });
-
-//Filter pets.
+// Get / filter pets.
 router.get("/", async (req, res) => {
   //Build query.
 
   //Basic filtering.
   const queryObject = { ...req.query };
 
-  const excludedFields = ["page", "sort", "limit", "fields"];
+  const excludedFields = ["page", "sort", "limit"];
   excludedFields.forEach((field) => {
     delete queryObject[field];
   });
@@ -45,6 +35,9 @@ router.get("/", async (req, res) => {
     query = query.sort(req.query.sort);
   }
 
+  const totalQueryPets = await Pet.countDocuments(query);
+  console.log(totalQueryPets);
+
   //Pagination of results.
   const page = req.query.page * 1 || 1;
   const limit = req.query.limit * 1 || 6;
@@ -54,14 +47,15 @@ router.get("/", async (req, res) => {
 
   if (req.query.page) {
     const totalPets = await Pet.countDocuments;
-    if (skip > totalPets) throw new Error("this page does not exist");
+    if (skip > totalPets) throw new Error("We don't have that many pets...");
   }
-
   //Execute query
   const pets = await query;
 
   //Send Response
-  res.status(200).json(pets);
+  res.status(200).json({ data: pets, totalPetsResults: totalQueryPets });
+  // res.status(200).json(pets);
+
   // .catch((err) =>
   //   res.status(404).json({ noPetsFound: "No pets were found." })
   // );
@@ -71,7 +65,9 @@ router.get("/", async (req, res) => {
 router.get("/:id", (req, res) => {
   Pet.findById(req.params.id)
     .then((pet) => res.status(200).json(pet))
-    .catch((err) => req.status(404).json({ noPetFound: "No pet was found." }));
+    .catch((err) =>
+      req.status(404).json({ noPetFound: "We can't find that pet..." })
+    );
 });
 
 //Add/save a pet.

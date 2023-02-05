@@ -1,16 +1,22 @@
 import queryString from "query-string";
+import { useEffect } from "react";
 import { useLoaderData, useSearchParams } from "react-router-dom";
 import { SearchBar } from "./searchBar";
 import { PetCard } from "./petCard";
-import { useEffect } from "react";
+import { Pagination } from "./pagination";
 
 export const PetSearchPage: Function = () => {
   let [searchParams, setSearchParams] = useSearchParams();
 
-  // const handleClick = () => {
-  //   clicked ? setClicked('') : setClicked('base-state click-state');
-  // };
-  const pets = useLoaderData() as Pet[];
+  const pets = useLoaderData() as PetData;
+
+  const resultsCount = pets.totalPetsResults;
+  const limit: number = Number(searchParams.get("limit") || 6);
+  const page: number = Number(searchParams.get("page") || 1);
+  const pages: number = Math.ceil(resultsCount / limit);
+  const pageList = [...Array(pages + 1).keys()].slice(1);
+  const next = page < pages ? page + 1 : page;
+  const previous = page > 1 ? page - 1 : page;
 
   useEffect(() => {
     setSearchParams(searchParams);
@@ -18,6 +24,24 @@ export const PetSearchPage: Function = () => {
 
   const clearQuery: React.MouseEventHandler = () => {
     return setSearchParams({});
+  };
+
+  const paginationQuery = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const { name: key, id: value } = e.currentTarget as HTMLButtonElement;
+    let parsed = queryString.parse(window.location.search);
+
+    if (!parsed[key]) {
+      //No key present in current search params, set search params.
+      parsed[key] = value;
+    } else if (value !== parsed[key]) {
+      //Key present but value is new in current search params,
+      //update params value.
+      delete parsed[key];
+      parsed[key] = value;
+    }
+
+    const stringified = queryString.stringify(parsed);
+    setSearchParams(stringified);
   };
 
   const sortQuery = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -35,6 +59,7 @@ export const PetSearchPage: Function = () => {
       //update params value.
       parsed[key] = value;
     }
+    delete parsed["page"];
 
     const stringified = queryString.stringify(parsed);
     setSearchParams(stringified);
@@ -61,6 +86,7 @@ export const PetSearchPage: Function = () => {
         return element !== value;
       });
     }
+    delete parsed["page"];
 
     const stringified = queryString.stringify(parsed);
     setSearchParams(stringified);
@@ -74,8 +100,16 @@ export const PetSearchPage: Function = () => {
         speciesQuery={speciesQuery}
       />
       <ul className="flex flex-row flex-wrap justify-evenly gap-x-1 gap-y-7 my-5">
-        <PetCard pets={pets} />
+        <PetCard pets={pets.data} />
       </ul>
+      <div className="flex my-20">
+        <Pagination
+          pageList={pageList}
+          next={next}
+          previous={previous}
+          paginationQuery={paginationQuery}
+        />
+      </div>
     </div>
   );
 };

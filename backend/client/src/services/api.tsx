@@ -1,16 +1,8 @@
 import { json } from "react-router-dom";
 
 //Fetch all pets.
-export const fetchPets = async ({
-  request,
-  params,
-}: {
-  request: any;
-  params: any;
-}) => {
+export const fetchPets = async () => {
   const query = window.location.search;
-  console.log(query);
-
   const res = await fetch(`/api/v1/pets${query}`);
   if (!res.ok) {
     throw json({ message: "No pets available." }, { status: 500 });
@@ -33,11 +25,6 @@ export const fetchPet = async ({
   params: any;
 }) => {
   const id = params.id;
-  console.log(id);
-  console.log(params);
-  console.log(request);
   const res = await fetch(`/api/v1/pets/${id}`);
-  console.log(res);
-
   return res;
 };

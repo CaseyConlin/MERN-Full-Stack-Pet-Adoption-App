@@ -1,3 +1,8 @@
+type PetData = {
+  totalPetsResults: number;
+  data: Pet[];
+};
+
 type Pet = {
   _id: string;
   name: string;
@@ -11,6 +16,7 @@ type Pet = {
   image: string;
   town: string;
   zip: string;
+  totalPetsResults: number;
 };
 
 type PetErrorType = {
