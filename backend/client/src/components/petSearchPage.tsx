@@ -9,7 +9,6 @@ export const PetSearchPage: Function = () => {
   let [searchParams, setSearchParams] = useSearchParams();
 
   const pets = useLoaderData() as PetData;
-  console.log(pets);
 
   useEffect(() => {
     setSearchParams(searchParams);
@@ -20,7 +19,6 @@ export const PetSearchPage: Function = () => {
   };
 
   //Pagination data.
-
   const resultsCount = pets.totalPetsResults;
   const limit: number = Number(searchParams.get("limit") || 6);
   const page: number = Number(searchParams.get("page") || 1);
@@ -31,7 +29,6 @@ export const PetSearchPage: Function = () => {
   }
   const next = page < pages ? page + 1 : page;
   const previous = page > 1 ? page - 1 : page;
-  console.log(pageList);
 
   const paginationQuery = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { name: key, id: value } = e.currentTarget as HTMLButtonElement;
@@ -49,6 +46,7 @@ export const PetSearchPage: Function = () => {
 
     const stringified = queryString.stringify(parsed);
     setSearchParams(stringified);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const sortQuery = (e: React.MouseEvent<HTMLButtonElement>) => {

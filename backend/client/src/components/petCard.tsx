@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import { multipleSpeciesStringConverter } from "./helpers";
+
 export const PetCard = ({ pets }: { pets: Pet[] }) => {
+  const scrollTo = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <>
       {pets.map((pet) => (
@@ -46,21 +51,24 @@ export const PetCard = ({ pets }: { pets: Pet[] }) => {
               </span>
             </div>
             <div className="flex items-center justify-start mb-2">
-              <Link
-                to={`/pets/?species=${pet.species}`}
-                className="inline-flex items-center mr-3 px-3 py-2 text-sm font-medium text-center text-white bg-slate-500 rounded-lg hover:bg-slate-800"
-              >
-                {"More " + multipleSpeciesStringConverter(pet.species)}
-                <svg
-                  aria-hidden="true"
-                  className="w-4 h-4 ml-2 -mr-1"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
+              <button onClick={scrollTo}>
+                <Link
+                  to={`/pets/?species=${pet.species}`}
+                  onClick={scrollTo}
+                  className="inline-flex items-center mr-3 px-3 py-2 text-sm font-medium text-center text-white bg-slate-500 rounded-lg hover:bg-slate-800"
                 >
-                  <path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"></path>
-                </svg>
-              </Link>
+                  {"More " + multipleSpeciesStringConverter(pet.species)}
+                  <svg
+                    aria-hidden="true"
+                    className="w-4 h-4 ml-2 -mr-1"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"></path>
+                  </svg>
+                </Link>
+              </button>
               <Link
                 to={`/pet/${pet._id}`}
                 className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-slate-700 rounded-lg hover:bg-slate-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
