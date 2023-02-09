@@ -1,12 +1,14 @@
 const mongoose = require("mongoose");
-const config = require("config");
-const db = config.get("mongoURI");
+const dotenv = require("dotenv");
+
+dotenv.config({ path: `${__dirname}/config.env` });
+
+const db = process.env.MONGO_URI;
 
 const connectDB = async () => {
   try {
     mongoose.set("strictQuery", true);
     await mongoose.connect(db, { useNewUrlParser: true });
-
     console.log("MongoDb is connected.");
   } catch (err) {
     console.error(err.message);

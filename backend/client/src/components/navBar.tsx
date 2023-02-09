@@ -1,8 +1,23 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const [userName, setUserName] = useState();
+  const navigate = useNavigate();
+
+  const logout = async () => {
+    localStorage.removeItem("token");
+    await navigate("/users/login");
+  };
+  useEffect(() => {
+    fetch("/users/isUserAuth", {
+      headers: { "x-access-token": `${localStorage.getItem("token")}` },
+    })
+      .then((res) => res.json())
+      .then((data) => (data.isLoggedIn ? setUserName(data.username) : null));
+  }, []);
+
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-slate-500 mb-3">
@@ -77,6 +92,42 @@ export const Navbar = () => {
                 >
                   <span className="ml-2">Rats</span>
                 </NavLink>
+              </li>
+
+              <li className="nav-item">
+                {userName ? (
+                  <NavLink
+                    className="px-3 py-2 flex items-center text-s  leading-snug text-white hover:opacity-75"
+                    to="users/my-account"
+                  >
+                    <span className="ml-2">My Profile</span>
+                  </NavLink>
+                ) : (
+                  <NavLink
+                    className="px-3 py-2 flex items-center text-s  leading-snug text-white hover:opacity-75"
+                    to="users/login"
+                  >
+                    <span className="ml-2">Login</span>
+                  </NavLink>
+                )}
+              </li>
+
+              <li className="nav-item">
+                {userName ? (
+                  <div
+                    className="px-3 py-2 flex items-center text-s leading-snug text-white hover:opacity-75"
+                    onClick={logout}
+                  >
+                    <span className="ml-2">Log Out</span>
+                  </div>
+                ) : (
+                  <NavLink
+                    className="px-3 py-2 flex items-center text-s leading-snug text-white hover:opacity-75"
+                    to="users/register"
+                  >
+                    <span className="ml-2">Register</span>
+                  </NavLink>
+                )}
               </li>
             </ul>
           </div>

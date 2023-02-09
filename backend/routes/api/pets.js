@@ -8,7 +8,7 @@ router.get("/test", (req, res) => {
   res.send("Pet route testing.");
 });
 
-// Get / filter pets.
+// Get and filter pets.
 router.get("/", async (req, res) => {
   //Build query.
 
@@ -53,7 +53,6 @@ router.get("/", async (req, res) => {
 
   //Send Response
   res.status(200).json({ data: pets, totalPetsResults: totalQueryPets });
-  // res.status(200).json(pets);
 
   // .catch((err) =>
   //   res.status(404).json({ noPetsFound: "No pets were found." })
