@@ -27,43 +27,80 @@ router.post("/register", async (req, res) => {
   dbUser.save(res.status(200).json({ message: "User successfully saved." }));
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   const userLoggingIn = req.body;
 
-  User.findOne({ username: userLoggingIn.username }).then((dbUser) => {
-    if (!dbUser) {
-      return res.json({
-        message: "Invalid username or password.",
-      });
-    }
-    bcrypt
-      .compare(userLoggingIn.password, dbUser.password)
-      .then((isCorrect) => {
-        if (isCorrect) {
-          const payload = {
-            id: dbUser._id,
-            username: dbUser.username,
-          };
-          jwt.sign(
-            payload,
-            process.env.JWT_SECRET,
-            { expiresIn: 86400 },
-            (err, token) => {
-              if (err) return res.json({ message: err });
-              return res.json({
-                message: "User account successfully created.",
-                token: "Bearer " + token,
-              });
-            }
-          );
-        } else {
-          return res.json({
-            message: "Invalid username or password.",
-          });
-        }
-      });
-  });
+  const dbUser = await User.findOne({ username: userLoggingIn.username });
+  if (!dbUser) {
+    return res.status(400).json({
+      message: "Invalid username or password.",
+    });
+  }
+  const isCorrect = await bcrypt.compare(
+    userLoggingIn.password,
+    dbUser.password
+  );
+  if (isCorrect) {
+    const payload = {
+      id: dbUser._id,
+      username: dbUser.username,
+    };
+    jwt.sign(
+      payload,
+      process.env.JWT_SECRET,
+      { expiresIn: 86400 },
+      (err, token) => {
+        if (err) return res.status(400).json({ message: err });
+        return res.status(200).json({
+          message: "User successfully logged in.",
+          token: "Bearer " + token,
+        });
+      }
+    );
+  } else {
+    return res.status(400).json({
+      message: "Invalid username or password.",
+    });
+  }
 });
+
+// router.post("/login", (req, res) => {
+//   const userLoggingIn = req.body;
+
+//   User.findOne({ username: userLoggingIn.username }).then((dbUser) => {
+//     if (!dbUser) {
+//       return res.status(400).json({
+//         message: "Invalid username or password.",
+//       });
+//     }
+//     bcrypt
+//       .compare(userLoggingIn.password, dbUser.password)
+//       .then((isCorrect) => {
+//         if (isCorrect) {
+//           const payload = {
+//             id: dbUser._id,
+//             username: dbUser.username,
+//           };
+//           jwt.sign(
+//             payload,
+//             process.env.JWT_SECRET,
+//             { expiresIn: 86400 },
+//             (err, token) => {
+//               if (err) return res.status(400).json({ message: err });
+//               return res.status(200).json({
+//                 message: "User successfully logged in.",
+//                 token: "Bearer " + token,
+//               });
+//             }
+//           );
+//         } else {
+//           return res.status(400).json({
+//             message: "Invalid username or password.",
+//           });
+//         }
+//       });
+//   });
+// });
 
 function verifyJWT(req, res, next) {
   // removes 'Bearer` from token

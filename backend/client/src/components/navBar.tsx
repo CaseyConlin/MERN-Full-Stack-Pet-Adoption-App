@@ -47,6 +47,7 @@ export const Navbar = () => {
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
               <li className="nav-item">
                 <NavLink
+                  onClick={() => setNavbarOpen(false)}
                   className="px-3 py-2 flex items-center text-s ppercase font-bold leading-snug text-white hover:opacity-75"
                   to={"pets/"}
                 >
@@ -55,6 +56,7 @@ export const Navbar = () => {
               </li>
               <li className="nav-item">
                 <NavLink
+                  onClick={() => setNavbarOpen(false)}
                   className="px-3 py-2 flex items-center text-s font-bold leading-snug text-white hover:opacity-75"
                   to="pets/?species=cat"
                 >
@@ -63,6 +65,7 @@ export const Navbar = () => {
               </li>
               <li className="nav-item">
                 <NavLink
+                  onClick={() => setNavbarOpen(false)}
                   className="px-3 py-2 flex items-center text-s font-bold leading-snug text-white hover:opacity-75"
                   to="pets/?species=dog"
                 >
@@ -71,6 +74,7 @@ export const Navbar = () => {
               </li>
               <li className="nav-item">
                 <NavLink
+                  onClick={() => setNavbarOpen(false)}
                   className="px-3 py-2 flex items-center text-s font-bold leading-snug text-white hover:opacity-75"
                   to="pets/?species=bunny"
                 >
@@ -79,6 +83,7 @@ export const Navbar = () => {
               </li>
               <li className="nav-item">
                 <NavLink
+                  onClick={() => setNavbarOpen(false)}
                   className="px-3 py-2 flex items-center text-s font-bold leading-snug text-white hover:opacity-75"
                   to="pets/?species=chicken"
                 >
@@ -87,16 +92,17 @@ export const Navbar = () => {
               </li>
               <li className="nav-item">
                 <NavLink
+                  onClick={() => setNavbarOpen(false)}
                   className="px-3 py-2 flex items-center text-s font-bold leading-snug text-white hover:opacity-75"
                   to="pets/?species=rat"
                 >
                   <span className="ml-2">Rats</span>
                 </NavLink>
               </li>
-
               <li className="nav-item">
                 {userName ? (
                   <NavLink
+                    onClick={() => setNavbarOpen(false)}
                     className="px-3 py-2 flex items-center text-s  leading-snug text-white hover:opacity-75"
                     to="users/my-account"
                   >
@@ -104,6 +110,7 @@ export const Navbar = () => {
                   </NavLink>
                 ) : (
                   <NavLink
+                    onClick={() => setNavbarOpen(false)}
                     className="px-3 py-2 flex items-center text-s  leading-snug text-white hover:opacity-75"
                     to="users/login"
                   >
@@ -111,17 +118,18 @@ export const Navbar = () => {
                   </NavLink>
                 )}
               </li>
-
               <li className="nav-item">
                 {userName ? (
-                  <div
+                  <NavLink
                     className="px-3 py-2 flex items-center text-s leading-snug text-white hover:opacity-75"
                     onClick={logout}
+                    to="users/login"
                   >
                     <span className="ml-2">Log Out</span>
-                  </div>
+                  </NavLink>
                 ) : (
                   <NavLink
+                    onClick={() => setNavbarOpen(false)}
                     className="px-3 py-2 flex items-center text-s leading-snug text-white hover:opacity-75"
                     to="users/register"
                   >

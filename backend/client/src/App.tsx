@@ -23,6 +23,7 @@ function App() {
         { path: "/pet/:id", element: <PetPage />, loader: petLoader },
         { path: "/users/register", element: <RegisterForm /> },
         { path: "/users/login", element: <LoginFrom /> },
+        { path: "/users/my-account", element: <MyAccount /> },
 
         // {
         //   path: "/users/my-account",
@@ -36,11 +37,7 @@ function App() {
     },
   ]);
 
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
