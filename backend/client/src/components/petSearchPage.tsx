@@ -106,7 +106,27 @@ export const PetSearchPage: Function = () => {
       />
 
       <ul className="flex flex-row flex-wrap justify-evenly gap-x-1 gap-y-7 my-5">
-        <PetCard pets={pets.data} />
+        {pets.data.length !== 0 ? (
+          pets.data.map((pet: PetCard) => (
+            <PetCard
+              key={pet._id}
+              species={pet.species}
+              _id={pet._id}
+              name={pet.name}
+              fee={pet.fee}
+              image={pet.image}
+              gender={pet.gender}
+              age={pet.age}
+              dateAddedToSite={pet.dateAddedToSite}
+            />
+          ))
+        ) : (
+          <div className="flex flex-col justify-center my-4">
+            <h3 className="text-center mb-4">
+              Woof... We're having trouble finding pets right now.
+            </h3>
+          </div>
+        )}
       </ul>
 
       <div className="flex my-20">

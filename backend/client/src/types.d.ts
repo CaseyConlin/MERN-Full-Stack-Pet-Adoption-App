@@ -19,6 +19,18 @@ type Pet = {
   totalPetsResults: number;
 };
 
+type PetCard = {
+  _id: string;
+  name: string;
+  species: string;
+  age: number;
+  image: string;
+  gender: string;
+  dateAddedToSite: string;
+  fee: number;
+  image: string;
+};
+
 type CartPet = {
   _id: string;
   name: string;
