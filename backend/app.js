@@ -4,8 +4,8 @@ const bodyParser = require("body-parser");
 const connectDB = require("./config/db");
 const cors = require("cors");
 
-const petRouter = require("./routes/api/pets");
-const userRouter = require("./routes/api/users");
+const petRouter = require("./routes/petsRoutes");
+const userRouter = require("./routes/usersRoutes");
 
 const app = express();
 

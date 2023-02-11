@@ -12,6 +12,7 @@ export const Navbar = () => {
   const logout = async () => {
     localStorage.removeItem("token");
     await navigate("/users/login");
+    setNavbarOpen(false);
   };
 
   useEffect(() => {
