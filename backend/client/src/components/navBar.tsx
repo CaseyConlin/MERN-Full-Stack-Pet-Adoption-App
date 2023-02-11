@@ -28,7 +28,7 @@ export const Navbar = () => {
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <NavLink
-              className="text-lg font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap  text-white"
+              className="text-lg font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap text-white"
               to="/"
             >
               petConnectApp
@@ -145,17 +145,15 @@ export const Navbar = () => {
                 <NavLink
                   onClick={() => setNavbarOpen(false)}
                   className="px-3 py-1 flex items-center justify-center text-s font-bold leading-snug text-white hover:scale-110 duration-300 hover:no-underline"
-                  to="pets/?species=rat"
+                  to="/cart"
                 >
                   <svg
                     aria-hidden="true"
                     focusable="false"
-                    data-prefix="fas"
-                    data-icon="cat"
                     className="w-10 h-10 "
                     role="img"
                     xmlns="http://www.w3.org/2000/svg"
-                    viewBox="100 200 600 400"
+                    viewBox="50 100 600 400"
                   >
                     <g fill="currentColor">
                       <path d="m484.2 167.89h15.422l-88.594-88.594c-2.0781-2.0781-5.5781-2.0781-7.7656 0-1.4219 1.4219-1.6406 3.0625-1.6406 3.8281 0 0.875 0.21875 2.5156 1.6406 3.8281z" />

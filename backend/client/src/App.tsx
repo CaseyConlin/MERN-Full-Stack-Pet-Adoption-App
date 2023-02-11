@@ -7,6 +7,7 @@ import { ErrorPage } from "./components/error";
 import { RegisterForm } from "./components/registerForm";
 import { LoginFrom } from "./components/loginForm";
 import { MyAccount } from "./components/myAccount";
+import { CartPage } from "./components/cartPage";
 import { fetchPets as petsLoader, fetchPet as petLoader } from "./services/api";
 // import { ProtectedRoute } from "./components/protectedRoute";
 
@@ -24,6 +25,7 @@ function App() {
         { path: "/users/register", element: <RegisterForm /> },
         { path: "/users/login", element: <LoginFrom /> },
         { path: "/users/my-account", element: <MyAccount /> },
+        { path: "/cart", element: <CartPage /> },
 
         // {
         //   path: "/users/my-account",

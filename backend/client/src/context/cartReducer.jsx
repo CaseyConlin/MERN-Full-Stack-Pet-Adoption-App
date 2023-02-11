@@ -1,6 +1,3 @@
-// /src/Context/Cart/CartReducer.jsx
-
-//Import the Action types
 import { ADD_TO_CART, REMOVE_ITEM, CHECKOUT, CLEAR } from "./cartTypes.js";
 
 const Storage = (cartItems) => {
@@ -10,7 +7,6 @@ const Storage = (cartItems) => {
   );
 };
 
-// Export function to calculate the total price of the cart and the total quantity of the cart
 export const sumItems = (cartItems) => {
   Storage(cartItems);
   let itemCount = cartItems.reduce(
@@ -23,11 +19,8 @@ export const sumItems = (cartItems) => {
   return { itemCount, total };
 };
 
-// The reducer is listening for an action, which is the type that we defined in the CartTypes.js file
 const CartReducer = (state, action) => {
-  // The switch statement is checking the type of action that is being passed in
   switch (action.type) {
-    // If the action type is ADD_TO_CART, we want to add the item to the cartItems array
     case ADD_TO_CART:
       if (!state.cartItems.find((item) => item._id === action.payload._id)) {
         state.cartItems.push({
@@ -42,7 +35,6 @@ const CartReducer = (state, action) => {
         cartItems: [...state.cartItems],
       };
 
-    // If the action type is REMOVE_ITEM, we want to remove the item from the cartItems array
     case REMOVE_ITEM:
       return {
         ...state,
@@ -54,7 +46,6 @@ const CartReducer = (state, action) => {
         ],
       };
 
-    // If the action type is CHECKOUT, we want to clear the cartItems array and set the checkout to true
     case CHECKOUT:
       return {
         cartItems: [],
@@ -62,14 +53,12 @@ const CartReducer = (state, action) => {
         ...sumItems([]),
       };
 
-    //If the action type is CLEAR, we want to clear the cartItems array
     case CLEAR:
       return {
         cartItems: [],
         ...sumItems([]),
       };
 
-    //Return the state if the action type is not found
     default:
       return state;
   }

@@ -19,6 +19,16 @@ type Pet = {
   totalPetsResults: number;
 };
 
+type CartPet = {
+  _id: string;
+  name: string;
+  species: string;
+  image: string;
+  gender: string;
+  fee: number;
+  image: string;
+};
+
 type PetErrorType = {
   status: number;
   data: { message: string };
