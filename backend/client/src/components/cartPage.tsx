@@ -2,15 +2,16 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import CartContext from "../context/cartContext";
 import { CartItem } from "./cartItem";
+import { CheckoutCard } from "./checkoutCard";
 export const CartPage = () => {
-  const { cartItems, total, itemCount } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
   return (
     <div className="container mx-auto">
-      <h1 className="font-medium text-center leading-tight text-5xl mt-0 mb-1 text-slate-700">
-        Your Cart
+      <h1 className="font-medium text-center leading-tight text-5xl my-5 text-slate-700">
+        Your Basket
       </h1>
-      <div className="flex flex-col md:flex-row mx-auto space-y-4 space-evenly justify-evenly  sm:p-10">
-        <ul className="flex md:w-3/6 flex-col divide-y px-4 md:p-0 divide-gray-700">
+      <div className="flex flex-col md:flex-row mx-auto  align-start space-evenly justify-evenly p-10">
+        <ul className="flex md:w-3/6 flex-col divide-y px-4 md:p-0 divide-gray-700 p-5 bg-white border border-gray-200 rounded-lg shadow">
           {cartItems.length !== 0 ? (
             cartItems.map((pet: CartPet) => (
               <CartItem
@@ -95,42 +96,7 @@ export const CartPage = () => {
             </div>
           )}
         </ul>
-        <div className="flex flex-col text-center justify-center md:justify-start">
-          <div className="mb-4 ">
-            <p className="font-bold my-1 text-xl">
-              Basket Total:
-              <span className="font-semibold "> ${total}</span>
-            </p>
-            <p className="text-md ">Includes adoption fee for each pet.</p>
-          </div>
-          <div className=" ">
-            <p className="font-bold my-1 text-md">
-              Number of Pets:
-              <span className="font-semibold "> {itemCount}</span>
-            </p>
-            <p className="text-sm ">
-              You can add or remove pets from your cart.
-            </p>
-          </div>
-          <div className="flex justify-center gap-2 my-5">
-            <button type="button" className="justify-self-stretch">
-              <Link
-                className="inline-flex  items-center px-3 py-2 text-sm font-medium text-center text-white bg-slate-700 rounded-lg hover:bg-slate-900 no-underline hover:no-underline"
-                to={`/pets`}
-              >
-                Back to Pets
-              </Link>
-            </button>
-            <button type="button" className="align-self-stretch">
-              <Link
-                className="inline-flex  items-center px-3 py-2 text-sm font-medium text-center text-white bg-slate-700 rounded-lg hover:bg-slate-900 no-underline hover:no-underline"
-                to={`/pets`}
-              >
-                Checkout
-              </Link>
-            </button>
-          </div>
-        </div>
+        <CheckoutCard />
       </div>
     </div>
   );

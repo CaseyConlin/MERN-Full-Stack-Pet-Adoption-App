@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import CartContext from "../context/cartContext";
 export const CartItem = (pet: CartPet) => {
   const { removeFromCart } = useContext(CartContext);
@@ -7,16 +8,21 @@ export const CartItem = (pet: CartPet) => {
     <li className="flex flex-col py-6 sm:flex-row sm:justify-between">
       <div className="flex w-full space-x-2 sm:space-x-4">
         <img
-          className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent rounded outline-none sm:w-32 sm:h-32 dark:bg-gray-500"
+          className="flex-shrink-0 object-cover w-20 h-20 rounded outline-none sm:w-32 sm:h-32"
           src={`/uploads/${pet.image}`}
           alt={pet.species + " for adoption."}
         />
         <div className="flex flex-col justify-between w-full pb-4">
           <div className="flex justify-between w-full pb-2 space-x-2">
             <div className="space-y-1">
-              <h3 className="text-lg font-semibold leading-snug sm:pr-8">
-                {pet.name}
-              </h3>
+              <Link
+                className="no-underline hover:no-underline "
+                to={`/pet/${pet._id}`}
+              >
+                <h3 className=" text-slate-700 hover:text-slate-800 text-xl font-semibold leading-snug sm:pr-8">
+                  {pet.name}
+                </h3>
+              </Link>
               <p className="text-sm">
                 {pet.species.charAt(0).toUpperCase() + pet.species.slice(1)}
               </p>

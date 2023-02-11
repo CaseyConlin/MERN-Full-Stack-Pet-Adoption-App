@@ -39,7 +39,7 @@ export const RegisterForm = () => {
 
   return (
     <>
-      <h1 className="font-medium text-center leading-tight text-5xl mt-0 mb-1 text-slate-700">
+      <h1 className="font-medium text-center leading-tight text-5xl my-5 text-slate-700">
         Register
       </h1>
 

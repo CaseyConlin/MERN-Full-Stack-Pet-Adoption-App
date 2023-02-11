@@ -173,7 +173,7 @@ export const PetPage = () => {
           </button>
         )}
         <div>
-          <p className="xl:pr-48 text-base lg:leading-tight leading-normal text-gray-600 mt-7">
+          <p className="xl:pr-48 text-base lg:leading-tight leading-normal text-gray-600 my-5">
             {pet.description}
           </p>
           <p className="text-base leading-4 mt-7 text-gray-600">
