@@ -27,7 +27,7 @@ export const PetPage = () => {
       <div className="md:hidden">
         <img
           className="w-full"
-          src={`http://localhost:8000/uploads/${pet.image}`}
+          src={`/uploads/${pet.image}`}
           alt={pet.species + " for adoption."}
         />
       </div>
