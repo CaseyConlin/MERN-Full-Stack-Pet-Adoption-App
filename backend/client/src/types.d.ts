@@ -46,3 +46,18 @@ type PetErrorType = {
   data: { message: string };
   message: string;
 };
+
+type Props = {
+  children: React.ReactNode;
+};
+
+type ACTIONTYPE =
+  | { type: "ADD_TO_CART"; payload: CartPet }
+  | { type: "REMOVE_ITEM"; payload: CartPet }
+  | { type: "CHECKOUT" }
+  | { type: "CLEAR" };
+
+type CartInitialState = {
+  cartItems: CartPet[];
+  checkout: boolean;
+};

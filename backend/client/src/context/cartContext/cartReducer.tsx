@@ -1,31 +1,30 @@
-import { ADD_TO_CART, REMOVE_ITEM, CHECKOUT, CLEAR } from "./cartTypes.js";
+import { ADD_TO_CART, REMOVE_ITEM, CHECKOUT, CLEAR } from "./cartTypes";
 
-const Storage = (cartItems) => {
+const Storage = (cartItems: CartPet[]) => {
   localStorage.setItem(
     "cartItems",
     JSON.stringify(cartItems.length > 0 ? cartItems : [])
   );
 };
 
-export const sumItems = (cartItems) => {
+export const sumItems = (cartItems: CartPet[]) => {
   Storage(cartItems);
-  let itemCount = cartItems.reduce(
-    (total, product) => total + product.quantity,
-    0
-  );
-  let total = cartItems
-    .reduce((total, product) => total + product.fee * product.quantity, 0)
-    .toFixed(2);
+  let itemCount = cartItems.length;
+  let total = cartItems.reduce((total, item) => total + item.fee, 0).toFixed(2);
   return { itemCount, total };
 };
 
-const CartReducer = (state, action) => {
+const CartReducer = (state: any, action: ACTIONTYPE) => {
   switch (action.type) {
     case ADD_TO_CART:
-      if (!state.cartItems.find((item) => item._id === action.payload._id)) {
+      if (
+        !state.cartItems.find(
+          (item: CartPet) => item._id === action.payload._id
+        )
+      ) {
         state.cartItems.push({
           ...action.payload,
-          quantity: 1,
+          // quantity: 1,
         });
       }
 
@@ -39,10 +38,14 @@ const CartReducer = (state, action) => {
       return {
         ...state,
         ...sumItems(
-          state.cartItems.filter((item) => item._id !== action.payload._id)
+          state.cartItems.filter(
+            (item: CartPet) => item._id !== action.payload._id
+          )
         ),
         cartItems: [
-          ...state.cartItems.filter((item) => item._id !== action.payload._id),
+          ...state.cartItems.filter(
+            (item: CartPet) => item._id !== action.payload._id
+          ),
         ],
       };
 

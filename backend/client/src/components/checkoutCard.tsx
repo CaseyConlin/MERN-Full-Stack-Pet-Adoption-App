@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import CartContext from "../context/cartContext";
+import CartContext from "../context/cartContext/cartContext";
 
 export const CheckoutCard = () => {
   const { total, itemCount } = useContext(CartContext);
@@ -34,7 +34,7 @@ export const CheckoutCard = () => {
           <button type="button" className="align-self-stretch">
             <Link
               className="inline-flex  items-center px-3 py-2 text-sm font-medium text-center text-white bg-slate-700 rounded-lg hover:bg-slate-900 no-underline hover:no-underline"
-              to={`/pets`}
+              to={`/checkout`}
             >
               Checkout
             </Link>

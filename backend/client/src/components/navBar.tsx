@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import CartContext from "../context/cartContext";
+import CartContext from "../context/cartContext/cartContext";
 
 export const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -21,7 +21,7 @@ export const Navbar = () => {
     })
       .then((res) => res.json())
       .then((data) => (data.isLoggedIn ? setUserName(data.username) : null));
-  }, []);
+  }, [navigate]);
 
   return (
     <>

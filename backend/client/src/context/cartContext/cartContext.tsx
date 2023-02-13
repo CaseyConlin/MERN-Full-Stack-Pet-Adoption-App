@@ -1,0 +1,11 @@
+import { createContext } from "react";
+
+const CartContext = createContext({
+  cartItems: [],
+  addToCart: (pet: CartPet) => {},
+  removeFromCart: (pet: CartPet) => {},
+  total: 0,
+  itemCount: 0,
+});
+
+export default CartContext;

@@ -1,13 +1,13 @@
 import { useState, useContext } from "react";
 import { useLoaderData } from "react-router-dom";
-import CartContext from "../context/cartContext";
+import CartContext from "../context/cartContext/cartContext";
 import { multipleSpeciesStringConverter } from "./helpers";
 
 export const PetPage = () => {
   const pet = useLoaderData() as Pet;
 
   const [showAdoption, setShowAdoption] = useState(false);
-  const [showContact, setshowContact] = useState(false);
+  const [showContact, setShowContact] = useState(false);
 
   const { addToCart, cartItems, removeFromCart } = useContext(CartContext);
 
@@ -240,7 +240,7 @@ export const PetPage = () => {
         <div>
           <div className="border-b py-4 border-gray-200">
             <div
-              onClick={() => setshowContact(!showContact)}
+              onClick={() => setShowContact(!showContact)}
               className="flex justify-between items-center cursor-pointer"
             >
               <p className="text-base leading-4 text-gray-800">Contact us</p>
