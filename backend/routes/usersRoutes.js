@@ -15,4 +15,6 @@ router.route("/login").post(userController.login);
 
 router.route("/isUserAuth").get(userController.userAuth);
 
+router.route("/logout").get(userController.logout);
+
 module.exports = router;

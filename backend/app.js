@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 
 const connectDB = require("./config/db");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const petRouter = require("./routes/petsRoutes");
 const userRouter = require("./routes/usersRoutes");
@@ -17,6 +18,7 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.use(bodyParser.json(), urlencodedParser);
 
 app.use(cors({ origin: true, credentials: true }));
+app.use(cookieParser());
 
 app.use(express.json());
 

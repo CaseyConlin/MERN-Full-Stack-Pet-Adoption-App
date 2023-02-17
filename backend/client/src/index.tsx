@@ -1,18 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { CartState } from "./context/cartContext/cartState";
+// import { UserState } from "./context/userContext/userState";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { AuthProvider } from "./context/userContext/useAuth";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <CartState>
-      <App />
-    </CartState>
+    <AuthProvider>
+      <CartState>
+        <App />
+      </CartState>
+    </AuthProvider>
   </React.StrictMode>
 );
 

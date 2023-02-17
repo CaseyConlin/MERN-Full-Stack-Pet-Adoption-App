@@ -14,7 +14,7 @@ export const sumItems = (cartItems: CartPet[]) => {
   return { itemCount, total };
 };
 
-const CartReducer = (state: any, action: ACTIONTYPE) => {
+const CartReducer = (state: any, action: CartActionType) => {
   switch (action.type) {
     case ADD_TO_CART:
       if (
@@ -24,7 +24,6 @@ const CartReducer = (state: any, action: ACTIONTYPE) => {
       ) {
         state.cartItems.push({
           ...action.payload,
-          // quantity: 1,
         });
       }
 

@@ -1,40 +1,49 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+// import UserContext from "../context/userContext/userContext";
+import useAuth from "../context/userContext/useAuth";
 
 export const LoginFrom = () => {
   const [message, setMessage] = useState();
   const [errorMessage, setErrorMessage] = useState();
-
+  // const { login } = useContext(UserContext);
   const navigate = useNavigate();
+
+  const { login } = useAuth();
+
   const handleLogin = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form: any = e.target;
-    const user = {
-      username: form[0].value,
+    const userData = {
+      email: form[0].value,
       password: form[1].value,
     };
+    login(userData);
+    setTimeout(() => {
+      navigate("/users/my-account");
+    }, 2000);
 
-    const loginUser = async () => {
-      const res = await fetch("/users/login", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify(user),
-      });
-      if (res.status !== 200) {
-        const data = await res.json();
-        setMessage(undefined);
-        return setErrorMessage(data.message);
-      } else {
-        const data = await res.json();
-        localStorage.setItem("token", data.token);
-        setErrorMessage(undefined);
-        setMessage(data.message);
-        setTimeout(() => {
-          navigate("/users/my-account");
-        }, 2000);
-      }
-    };
-    loginUser();
+    // const loginUser = async () => {
+    //   const res = await fetch("/users/login", {
+    //     method: "POST",
+    //     headers: { "Content-type": "application/json" },
+    //     body: JSON.stringify(user),
+    //   });
+    //   if (res.status !== 200) {
+    //     const data = await res.json();
+    //     setMessage(undefined);
+    //     return setErrorMessage(data.message);
+    //   } else {
+    //     const data = await res.json();
+    //     localStorage.setItem("token", data.token);
+    //     setErrorMessage(undefined);
+    //     setMessage(data.message);
+    //     setTimeout(() => {
+    //       navigate("/users/my-account");
+    //     }, 2000);
+    //   }
+    // };
+    // loginUser();
   };
   //   const requestHeaders: HeadersInit = new Headers();
   //   requestHeaders.set("Content-Type", "application/json");
@@ -69,7 +78,7 @@ export const LoginFrom = () => {
                   <input
                     type="text"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Username"
+                    placeholder="Email"
                   />
                 </div>
                 <div className="mb-6">

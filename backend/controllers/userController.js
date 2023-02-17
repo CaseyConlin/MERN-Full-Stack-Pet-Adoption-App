@@ -1,4 +1,3 @@
-const { promisify } = require("util");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
@@ -29,10 +28,10 @@ exports.registration = async (req, res) => {
 exports.login = async (req, res) => {
   const userLoggingIn = req.body;
 
-  const dbUser = await User.findOne({ username: userLoggingIn.username });
+  const dbUser = await User.findOne({ email: userLoggingIn.email });
   if (!dbUser) {
     return res.status(400).json({
-      message: "Invalid username or password.",
+      message: "Invalid username.",
     });
   }
   const isCorrect = await bcrypt.compare(
@@ -43,34 +42,49 @@ exports.login = async (req, res) => {
     const payload = {
       id: dbUser._id,
       username: dbUser.username,
+      email: dbUser.email,
     };
     jwt.sign(
       payload,
       process.env.JWT_SECRET,
-      { expiresIn: 86400 },
+      { expiresIn: "15m" },
       (err, token) => {
-        if (err) return res.status(400).json({ message: err });
-        return res.status(200).json({
-          message: "User successfully logged in.",
-          token: "Bearer " + token,
+        if (err) return res.status(401).json({ message: "Invalid password." });
+
+        return res.status(200).cookie("token", token, { httpOnly: true }).json({
+          message: "User login successful.",
+          user: payload,
         });
       }
     );
   } else {
-    return res.status(400).json({
+    return res.status(401).json({
       message: "Invalid username or password.",
     });
   }
 };
 
 exports.userAuth = async (req, res, next) => {
-  const token = req.headers["x-access-token"]?.split(" ")[1];
+  const token = req.cookies.token;
   if (!token) {
-    return res.json({
-      isLoggedIn: false,
+    return res.status(401).json({
       message: "You are not logged in, please log in",
     });
   }
-  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  return res.json({ isLoggedIn: true, username: decoded.username });
+  await jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
+    if (err) {
+      return res
+        .status(401)
+        .clearCookie("token")
+        .json({ message: "User session expired." });
+    }
+    return res.status(200).json({ user: decoded, message: "succes" });
+  });
+};
+// const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+// return await res.status(200).json({ user: decoded, message: "success" });
+
+exports.logout = async (req, res, next) => {
+  res.clearCookie("token");
+  res.send({ success: true });
 };

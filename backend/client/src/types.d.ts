@@ -51,7 +51,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-type ACTIONTYPE =
+type CartActionType =
   | { type: "ADD_TO_CART"; payload: CartPet }
   | { type: "REMOVE_ITEM"; payload: CartPet }
   | { type: "CHECKOUT" }
@@ -60,4 +60,26 @@ type ACTIONTYPE =
 type CartInitialState = {
   cartItems: CartPet[];
   checkout: boolean;
+};
+
+type User = {
+  username?: string;
+  email?: string;
+  password: string;
+};
+
+type AuthContextType = {
+  user?: User;
+  loading?: boolean;
+  error?: any;
+  login: (user: User) => void;
+  signUp?: (email: string, name: string, password: string) => void;
+  logout?: () => void;
+};
+
+type UserActionType = { type: "LOGIN"; payload: User } | { type: "LOGOUT" };
+
+type UserInitialState = {
+  user: User;
+  loggedIn: boolean;
 };
