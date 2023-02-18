@@ -1,5 +1,3 @@
-import { isDisabled } from "@testing-library/user-event/dist/utils";
-import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../context/userContext/useAuth";
 
@@ -89,6 +87,12 @@ export const LoginFrom = () => {
                   Log In{loading}
                 </button>
               </form>
+              <div className="flex justify-between items-center my-6">
+                <p className="text-black-600">
+                  For testing purposes, you can log in with email:{" "}
+                  <b>test@fake.com</b> and password: <b>fake</b>.
+                </p>
+              </div>
               {message ? (
                 <div
                   className="bg-blue-100 text-center rounded-lg py-3 px-6 my-4 text-base text-blue-700 mb-3"

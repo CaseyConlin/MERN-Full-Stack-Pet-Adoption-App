@@ -32,7 +32,6 @@ export const loginUser = async (user: User) => {
   });
   if (res.status !== 200) {
     const data = await res.json();
-
     return Promise.reject(data.message);
   } else {
     const data = await res.json();
