@@ -1,34 +1,26 @@
-import { useState, useEffect, useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import { NavLink } from "react-router-dom";
 import CartContext from "../context/cartContext/cartContext";
-import { getUser } from "../services/api";
-import { logoutUser } from "../services/api";
+import useAuth from "../context/userContext/useAuth";
+
 export const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
-  const [userName, setUserName] = useState();
   const { cartItems } = useContext(CartContext);
-  const [error, setError] = useState();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    getUser()
-      .then((data) => setUserName(data))
-      .catch((data) => setError(data));
-  }, [navigate, setUserName]);
-
-  const logoutHandler = () => {
-    setUserName(undefined);
-    logoutUser();
-    setNavbarOpen(false);
-    setTimeout(() => {
-      navigate("/");
-    }, 1000);
-    setUserName(undefined);
-  };
+  const { user, message, logout } = useAuth();
 
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-slate-500 mb-3">
+        {message ? (
+          <div
+            className="fixed w-1/2 inset-x-0 max-w-max mx-auto top-1 transition-opacity ease-in duration-300 bg-opacity-80 bg-green-100 rounded-lg py-1 px-2  text-base text-green-700"
+            role="alert"
+          >
+            {message}
+          </div>
+        ) : (
+          ""
+        )}
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <NavLink
@@ -109,7 +101,7 @@ export const Navbar = () => {
               </li>
 
               <li className="nav-item">
-                {userName ? (
+                {user ? (
                   <NavLink
                     onClick={() => setNavbarOpen(false)}
                     className="px-3 py-2 flex items-center text-s  leading-snug text-white hover:no-underline"
@@ -128,13 +120,13 @@ export const Navbar = () => {
                 )}
               </li>
               <li className="nav-item">
-                {userName ? (
+                {user ? (
                   <NavLink
                     className="px-3 py-2 flex items-center text-s leading-snug text-white hover:no-underline"
-                    onClick={logoutHandler}
-                    to="users/login"
+                    onClick={logout}
+                    to="/"
                   >
-                    <span className="ml-2">Log Out </span>
+                    <span className="ml-2">Log Out</span>
                   </NavLink>
                 ) : (
                   <NavLink

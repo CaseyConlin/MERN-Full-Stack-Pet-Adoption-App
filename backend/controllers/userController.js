@@ -31,7 +31,7 @@ exports.login = async (req, res) => {
   const dbUser = await User.findOne({ email: userLoggingIn.email });
   if (!dbUser) {
     return res.status(400).json({
-      message: "Invalid username.",
+      message: "No username provided.",
     });
   }
   const isCorrect = await bcrypt.compare(
@@ -40,7 +40,7 @@ exports.login = async (req, res) => {
   );
   if (isCorrect) {
     const payload = {
-      id: dbUser._id,
+      _id: dbUser._id,
       username: dbUser.username,
       email: dbUser.email,
     };
@@ -78,7 +78,14 @@ exports.userAuth = async (req, res, next) => {
         .clearCookie("token")
         .json({ message: "User session expired." });
     }
-    return res.status(200).json({ user: decoded, message: "succes" });
+    return res.status(200).json({
+      user: {
+        _id: decoded._id,
+        username: decoded.username,
+        email: decoded.email,
+      },
+      message: "Success.",
+    });
   });
 };
 // const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
@@ -86,5 +93,5 @@ exports.userAuth = async (req, res, next) => {
 
 exports.logout = async (req, res, next) => {
   res.clearCookie("token");
-  res.send({ success: true });
+  res.json({ message: "You have been logged out." });
 };

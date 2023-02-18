@@ -1,15 +1,12 @@
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import UserContext from "../context/userContext/userContext";
 import useAuth from "../context/userContext/useAuth";
 
 export const LoginFrom = () => {
-  const [message, setMessage] = useState();
-  const [errorMessage, setErrorMessage] = useState();
-  // const { login } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const { login } = useAuth();
+  const { login, message, error, user, loading } = useAuth();
 
   const handleLogin = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,44 +15,15 @@ export const LoginFrom = () => {
       email: form[0].value,
       password: form[1].value,
     };
+
     login(userData);
+  };
+
+  if (user) {
     setTimeout(() => {
       navigate("/users/my-account");
     }, 2000);
-
-    // const loginUser = async () => {
-    //   const res = await fetch("/users/login", {
-    //     method: "POST",
-    //     headers: { "Content-type": "application/json" },
-    //     body: JSON.stringify(user),
-    //   });
-    //   if (res.status !== 200) {
-    //     const data = await res.json();
-    //     setMessage(undefined);
-    //     return setErrorMessage(data.message);
-    //   } else {
-    //     const data = await res.json();
-    //     localStorage.setItem("token", data.token);
-    //     setErrorMessage(undefined);
-    //     setMessage(data.message);
-    //     setTimeout(() => {
-    //       navigate("/users/my-account");
-    //     }, 2000);
-    //   }
-    // };
-    // loginUser();
-  };
-  //   const requestHeaders: HeadersInit = new Headers();
-  //   requestHeaders.set("Content-Type", "application/json");
-
-  //   useEffect(() => {
-  //     fetch("/users/isUserAuth", {
-  //       headers: { "x-access-token": `${localStorage.getItem("token")}` },
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => (data.isLoggedIn ? navigate("/users/my-account") : null));
-  //   }, [navigate]);
-
+  }
   return (
     <>
       <h1 className="font-medium text-center leading-tight text-5xl my-5 text-slate-700">
@@ -79,6 +47,7 @@ export const LoginFrom = () => {
                     type="text"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Email"
+                    disabled={loading}
                   />
                 </div>
                 <div className="mb-6">
@@ -86,6 +55,7 @@ export const LoginFrom = () => {
                     type="password"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Password"
+                    disabled={loading}
                   />
                 </div>
 
@@ -114,8 +84,9 @@ export const LoginFrom = () => {
                   hover:bg-gray-900"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
+                  disabled={loading}
                 >
-                  Log In
+                  Log In{loading}
                 </button>
               </form>
               {message ? (
@@ -126,12 +97,12 @@ export const LoginFrom = () => {
                   {message}
                 </div>
               ) : null}
-              {errorMessage && (
+              {error && (
                 <div
                   className="bg-red-100 text-center rounded-lg py-3 px-6 my-4 text-base text-red-700 mb-3"
                   role="alert"
                 >
-                  {errorMessage}
+                  {error}
                 </div>
               )}
             </div>

@@ -10,13 +10,7 @@ export const fetchPets = async () => {
   return res;
 };
 
-// export const searchPets = async (query?: string) => {
-//   const res = await fetch(`/api/v1/pets/${query}`);
-//   const data = await res.json();
-//   return data;
-// };
-
-//Fetch details for one pet.
+//Fetch one pet.
 export const fetchPet = async ({
   request,
   params,
@@ -29,6 +23,7 @@ export const fetchPet = async ({
   return res;
 };
 
+//Authorize users.
 export const loginUser = async (user: User) => {
   const res = await fetch("/users/login", {
     method: "POST",
@@ -37,18 +32,11 @@ export const loginUser = async (user: User) => {
   });
   if (res.status !== 200) {
     const data = await res.json();
-    // setMessage(undefined);
-    // return setErrorMessage(data.message);
-    return data.message;
+
+    return Promise.reject(data.message);
   } else {
     const data = await res.json();
     return data;
-    // localStorage.setItem("token", data.token);
-    // setErrorMessage(undefined);
-    // setMessage(data.message);
-    // setTimeout(() => {
-    //   navigate("/users/my-account");
-    // }, 2000);
   }
 };
 
@@ -59,7 +47,7 @@ export const getUser = async () => {
   });
   if (res.status !== 200) {
     const data = await res.json();
-    throw new Error(data.message);
+    return Promise.reject(data.message);
   }
   const data = await res.json();
   return data;
@@ -71,5 +59,5 @@ export const logoutUser = async () => {
     headers: { "Content-type": "application/json" },
   });
   const data = await res.json();
-  return data.success;
+  return data;
 };

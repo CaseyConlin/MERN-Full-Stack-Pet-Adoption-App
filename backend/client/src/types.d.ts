@@ -63,13 +63,18 @@ type CartInitialState = {
 };
 
 type User = {
+  _id?: string;
+  message?: string;
   username?: string;
   email?: string;
   password: string;
 };
 
+type AuthMessage = string;
+
 type AuthContextType = {
   user?: User;
+  message?: string;
   loading?: boolean;
   error?: any;
   login: (user: User) => void;

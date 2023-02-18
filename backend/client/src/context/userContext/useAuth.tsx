@@ -6,9 +6,8 @@ import {
   useMemo,
   useState,
 } from "react";
-import { useNavigate } from "react-router-dom";
 
-import { loginUser, getUser } from "../../services/api";
+import { loginUser, logoutUser, getUser } from "../../services/api";
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
@@ -19,27 +18,57 @@ export function AuthProvider({
   children: ReactNode;
 }): JSX.Element {
   const [user, setUser] = useState<User>();
+  const [message, setMessage] = useState<AuthMessage>();
+  const [error, setError] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(false);
+  //   const [loadingInitial, setLoadingInitial] = useState<boolean>(true);
 
-  //   useEffect(() => {
-  //     getUser()
-  //       .then((user) => setUser(user))
-  //       .catch((_error) => {
-  //         return;
-  //       });
-  //     //   .finally(() => setLoadingInitial(false));
-  //   }, []);
+  useEffect(() => {
+    getUser().then((data) => {
+      setUser(data.user);
+    });
+    //   .finally(() => setLoadingInitial(false));
+    //   .catch((_error) => {});
+    return function cleanup() {
+      setError(undefined);
+    };
+  }, []);
 
   const login = (user: User) => {
-    loginUser(user).then((userRes) => {
-      setUser(userRes);
+    setLoading(true);
+    setError(undefined);
+    loginUser(user)
+      .then((data) => {
+        setUser(data.user);
+        setMessage(data.message);
+        setTimeout(() => {
+          setMessage(undefined);
+        }, 2000);
+      })
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  };
+
+  const logout = () => {
+    logoutUser().then((data) => {
+      setUser(undefined);
+      setMessage(data.message);
+      setTimeout(() => {
+        setMessage(undefined);
+      }, 2000);
     });
   };
+
   const memoedValue = useMemo(
     () => ({
       user,
+      message,
+      error,
+      loading,
       login,
+      logout,
     }),
-    [user]
+    [user, message, error, loading]
   );
 
   return (
