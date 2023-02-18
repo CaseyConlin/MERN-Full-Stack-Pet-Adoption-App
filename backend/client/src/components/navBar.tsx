@@ -1,9 +1,11 @@
 import { useState, useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import CartContext from "../context/cartContext/cartContext";
 import useAuth from "../context/userContext/useAuth";
 
 export const Navbar = () => {
+  const location = useLocation();
+  console.log(location.pathname);
   const [navbarOpen, setNavbarOpen] = useState(false);
   const { cartItems } = useContext(CartContext);
   const { user, message, logout } = useAuth();
@@ -11,7 +13,7 @@ export const Navbar = () => {
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-slate-500 mb-3">
-        {message ? (
+        {message && location.pathname !== "/users/login" ? (
           <div
             className="fixed w-1/2 inset-x-0 max-w-max mx-auto top-1 transition-opacity ease-in duration-300 bg-opacity-80 bg-green-100 rounded-lg py-1 px-2  text-base text-green-700"
             role="alert"
