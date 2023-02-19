@@ -1,8 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useAuth from "../context/userContext/useAuth";
 
 export const RegisterForm = () => {
-  const { register, message, error, user, loading } = useAuth();
+  const { register, message, error, loading } = useAuth();
 
   const handleRegister = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
