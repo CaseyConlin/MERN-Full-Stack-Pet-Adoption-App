@@ -67,7 +67,7 @@ type User = {
   message?: string;
   username?: string;
   email?: string;
-  password: string;
+  password?: string;
 };
 
 type AuthMessage = string;
@@ -78,8 +78,8 @@ type AuthContextType = {
   loading?: boolean;
   error?: any;
   login: (user: User) => void;
-  signUp?: (email: string, name: string, password: string) => void;
-  logout?: () => void;
+  register: (user: User) => void;
+  logout: () => void;
 };
 
 type UserActionType = { type: "LOGIN"; payload: User } | { type: "LOGOUT" };

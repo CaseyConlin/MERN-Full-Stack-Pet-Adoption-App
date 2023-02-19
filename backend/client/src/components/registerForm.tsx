@@ -1,40 +1,18 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../context/userContext/useAuth";
 
 export const RegisterForm = () => {
-  const [message, setMessage] = useState();
-  const [errorMessage, setErrorMessage] = useState();
-  const navigate = useNavigate();
+  const { register, message, error, user, loading } = useAuth();
 
   const handleRegister = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form: any = e.target;
-    const user = {
+    const userData = {
       username: form[0].value,
       email: form[1].value,
       password: form[2].value,
     };
-
-    const sendUser = async () => {
-      const res = await fetch("/users/register", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify(user),
-      });
-      if (res.status === 400) {
-        const data = await res.json();
-        setMessage(undefined);
-        return setErrorMessage(data.message);
-      } else {
-        const data = await res.json();
-        setErrorMessage(undefined);
-        setMessage(data.message);
-        setTimeout(() => {
-          navigate("/users/login");
-        }, 3000);
-      }
-    };
-    sendUser();
+    register(userData);
   };
 
   return (
@@ -60,6 +38,7 @@ export const RegisterForm = () => {
                     type="text"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Username"
+                    disabled={loading}
                   />
                 </div>
                 <div className="mb-6">
@@ -67,6 +46,7 @@ export const RegisterForm = () => {
                     type="text"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Email address"
+                    disabled={loading}
                   />
                 </div>
 
@@ -75,6 +55,7 @@ export const RegisterForm = () => {
                     type="password"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Password"
+                    disabled={loading}
                   />
                 </div>
 
@@ -115,12 +96,12 @@ export const RegisterForm = () => {
                   {message}
                 </div>
               ) : null}
-              {errorMessage && (
+              {error && (
                 <div
                   className="bg-red-100 text-center rounded-lg py-3 px-6 my-4 text-base text-red-700 mb-3"
                   role="alert"
                 >
-                  {errorMessage}
+                  {error}
                 </div>
               )}
             </div>

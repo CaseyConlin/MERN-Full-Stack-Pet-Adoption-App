@@ -8,7 +8,6 @@ const User = require("../models/userModel");
 
 exports.registration = async (req, res) => {
   const user = req.body;
-
   const takenUsername = await User.findOne({ username: user.username });
   const takenEmail = await User.findOne({ email: user.email });
 
@@ -22,7 +21,11 @@ exports.registration = async (req, res) => {
     email: user.email.toLowerCase(),
     password: user.password,
   });
-  dbUser.save(res.status(200).json({ message: "User successfully saved." }));
+  dbUser.save(
+    res
+      .status(200)
+      .json({ message: `User ${user.username} successfully created.` })
+  );
 };
 
 exports.login = async (req, res) => {

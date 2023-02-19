@@ -6,8 +6,13 @@ import {
   useMemo,
   useState,
 } from "react";
-
-import { loginUser, logoutUser, getUser } from "../../services/api";
+import { useNavigate } from "react-router-dom";
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getUser,
+} from "../../services/api";
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
@@ -22,17 +27,33 @@ export function AuthProvider({
   const [error, setError] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
   //   const [loadingInitial, setLoadingInitial] = useState<boolean>(true);
-
+  const navigate = useNavigate();
   useEffect(() => {
-    getUser().then((data) => {
-      setUser(data.user);
-    });
-    //   .finally(() => setLoadingInitial(false));
-    //   .catch((_error) => {});
+    getUser()
+      .then((data) => {
+        setUser(data.user);
+      })
+      .catch((_error) => {});
     return function cleanup() {
       setError(undefined);
     };
   }, []);
+
+  const register = (user: User) => {
+    setLoading(true);
+    setError(undefined);
+    registerUser(user)
+      .then((data) => {
+        setUser(data.user);
+        setMessage(data.message);
+        setTimeout(() => {
+          setMessage(undefined);
+          navigate("/users/login");
+        }, 2000);
+      })
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  };
 
   const login = (user: User) => {
     setLoading(true);
@@ -43,6 +64,7 @@ export function AuthProvider({
         setMessage(data.message);
         setTimeout(() => {
           setMessage(undefined);
+          navigate("/users/my-account");
         }, 2000);
       })
       .catch((err) => setError(err))
@@ -55,6 +77,7 @@ export function AuthProvider({
       setMessage(data.message);
       setTimeout(() => {
         setMessage(undefined);
+        navigate("/");
       }, 2000);
     });
   };
@@ -65,6 +88,7 @@ export function AuthProvider({
       message,
       error,
       loading,
+      register,
       login,
       logout,
     }),

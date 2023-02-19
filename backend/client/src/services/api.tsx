@@ -24,6 +24,21 @@ export const fetchPet = async ({
 };
 
 //Authorize users.
+export const registerUser = async (user: User) => {
+  const res = await fetch("/users/register", {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(user),
+  });
+  if (res.status !== 200) {
+    const data = await res.json();
+    return Promise.reject(data.message);
+  } else {
+    const data = await res.json();
+    return data;
+  }
+};
+
 export const loginUser = async (user: User) => {
   const res = await fetch("/users/login", {
     method: "POST",

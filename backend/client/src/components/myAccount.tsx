@@ -1,15 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import useAuth from "../context/userContext/useAuth";
 export const MyAccount = () => {
-  // const userData: any = useLoaderData();
   const { user, message, error, logout } = useAuth();
-  const navigate = useNavigate();
-
-  if (!user) {
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
-  }
 
   return (
     <div className="mx-auto right-0 mt-5 w-60">

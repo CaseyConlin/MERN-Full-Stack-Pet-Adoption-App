@@ -5,7 +5,6 @@ import useAuth from "../context/userContext/useAuth";
 
 export const Navbar = () => {
   const location = useLocation();
-  console.log(location.pathname);
   const [navbarOpen, setNavbarOpen] = useState(false);
   const { cartItems } = useContext(CartContext);
   const { user, message, logout } = useAuth();

@@ -1,10 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useAuth from "../context/userContext/useAuth";
 
 export const LoginFrom = () => {
-  const navigate = useNavigate();
-
-  const { login, message, error, user, loading } = useAuth();
+  const { login, message, error, loading } = useAuth();
 
   const handleLogin = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,11 +15,6 @@ export const LoginFrom = () => {
     login(userData);
   };
 
-  if (user) {
-    setTimeout(() => {
-      navigate("/users/my-account");
-    }, 2000);
-  }
   return (
     <>
       <h1 className="font-medium text-center leading-tight text-5xl my-5 text-slate-700">
