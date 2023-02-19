@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   registerUser,
   loginUser,
@@ -26,17 +26,21 @@ export function AuthProvider({
   const [message, setMessage] = useState<AuthMessage>();
   const [error, setError] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
-  //   const [loadingInitial, setLoadingInitial] = useState<boolean>(true);
+  const [loadingInitial, setLoadingInitial] = useState<boolean>(true);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (error) setError(null);
+  }, [location.pathname]);
+
   useEffect(() => {
     getUser()
       .then((data) => {
         setUser(data.user);
       })
-      .catch((_error) => {});
-    return function cleanup() {
-      setError(undefined);
-    };
+      .catch((_error) => {})
+      .finally(() => setLoadingInitial(false));
   }, []);
 
   const register = (user: User) => {
@@ -96,7 +100,9 @@ export function AuthProvider({
   );
 
   return (
-    <AuthContext.Provider value={memoedValue}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={memoedValue}>
+      {!loadingInitial && children}
+    </AuthContext.Provider>
   );
 }
 

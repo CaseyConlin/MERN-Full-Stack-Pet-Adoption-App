@@ -88,7 +88,7 @@ export const LoginFrom = () => {
               </div>
               {message ? (
                 <div
-                  className="bg-blue-100 text-center rounded-lg py-3 px-6 my-4 text-base text-blue-700 mb-3"
+                  className="bg-green-100 text-center rounded-lg py-3 px-6 my-4 text-base text-green-700 mb-3"
                   role="alert"
                 >
                   {message}
