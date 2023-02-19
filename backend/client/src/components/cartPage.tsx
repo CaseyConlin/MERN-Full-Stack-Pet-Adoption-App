@@ -10,7 +10,7 @@ export const CartPage = () => {
       <h1 className="font-medium text-center leading-tight text-5xl my-5 text-slate-700">
         Your Basket
       </h1>
-      <div className="flex flex-col md:flex-row mx-auto  align-start space-evenly justify-evenly p-10">
+      <div className="flex flex-col sm:flex-row mx-auto justify-start space-evenly sm:align-start gap-5  justify-evenly ">
         <ul className="flex md:w-3/6 flex-col divide-y px-4 md:p-0 divide-gray-700 p-5 bg-white border border-gray-200 rounded-lg shadow">
           {cartItems.length !== 0 ? (
             cartItems.map((pet: CartPet) => (
