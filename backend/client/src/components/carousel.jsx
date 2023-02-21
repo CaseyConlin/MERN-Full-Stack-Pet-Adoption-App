@@ -36,9 +36,6 @@ export const Carousel = () => {
     else return setWindowCountOffset(1);
   };
   useEffect(() => detectWindow(), []);
-  //   useEffect(() => {
-  //     setLength(children.length);
-  //   }, [children]);
 
   return (
     <div className="carousel-container w-full mt-5 flex flex-col ">
@@ -57,7 +54,10 @@ export const Carousel = () => {
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {petData.map((pet) => (
-              <div className=" w-full sm:w-11/12 sm:mx-2 md:mx-3 shrink-0 bg-white border border-gray-200 rounded-lg shadow">
+              <div
+                key={pet._id}
+                className=" w-full sm:w-11/12 sm:mx-2 md:mx-3 shrink-0 bg-white border border-gray-200 rounded-lg shadow"
+              >
                 <img
                   className="w-full rounded-t-lg"
                   src={`/uploads/${pet.image}`}

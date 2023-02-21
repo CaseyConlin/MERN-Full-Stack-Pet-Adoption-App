@@ -1,8 +1,9 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 
 const connectDB = require("./config/db");
 const cors = require("cors");
+
+const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const petRouter = require("./routes/petsRoutes");

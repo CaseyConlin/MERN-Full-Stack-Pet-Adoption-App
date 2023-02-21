@@ -57,22 +57,23 @@ export const Homepage = () => {
       </p>
       <p className=" my-2 w-9/12 my-1 mx-auto text-center">
         Client side the React app builds search params and calls to the API.
-        <p className=" my-2 w-9/12 my-1 mx-auto text-center">
-          The shopping basket / cart is managed as state using React context in
-          browser local storage. The total cost is transmitted to the backend
-          for processing through Stripe at checkout.
-        </p>
-        <p className=" my-2 w-9/12 my-1 mx-auto text-center">
-          Routing is handled clientside by React Router, with useLoaderData hook
-          making API calls where possible.
-        </p>
-        <p className=" my-2 w-9/12 my-1 mx-auto text-center">
-          User authentication state is managed with React context
-        </p>
-        <p className=" my-2 w-9/12 my-1 mx-auto text-center">
-          The app is styled with Tailwind and uses Typescript.
-        </p>
       </p>
+      <p className=" my-2 w-9/12 my-1 mx-auto text-center">
+        The shopping basket / cart is managed as state using React context in
+        browser local storage. The total cost is transmitted to the backend for
+        processing through Stripe at checkout.
+      </p>
+      <p className=" my-2 w-9/12 my-1 mx-auto text-center">
+        Routing is handled clientside by React Router, with useLoaderData hook
+        making API calls where possible.
+      </p>
+      <p className=" my-2 w-9/12 my-1 mx-auto text-center">
+        User authentication state is managed with React context
+      </p>
+      <p className=" my-2 w-9/12 my-1 mx-auto text-center">
+        The app is styled with Tailwind and uses Typescript.
+      </p>
+
       <p className=" w-10/12 my-5 text-lg font-bold mx-auto text-center">
         If you have any questions contact{" "}
         <a className="text-blue-800" href="mailto:casey.conlin@gmail.com">
@@ -82,47 +83,3 @@ export const Homepage = () => {
     </div>
   );
 };
-//  <li
-// key={pet._id}
-// className="max-w-sm md:w-2/5 bg-white border border-gray-200 rounded-lg shadow"
-// >
-// <Link to={`/pet/${pet._id}`}>
-//   <img
-//     className="rounded-t-lg"
-//     src={`/uploads/${pet.image}`}
-//     alt={pet.species + " for adoption."}
-//   />
-// </Link>
-// <div className="p-3">
-//   <div className="flex items-center justify-between mb-2">
-//     <Link to={`/pet/${pet._id}`}>
-//       <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-//         {pet.name}
-//       </h5>
-//       </Link>
-
-//   </div>
-//   <div className="flex items-center justify-start mb-2">
-//     <button
-//       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-//     >
-//       <Link
-//         to={`/pets/?species=${pet.species}`}
-//         className="inline-flex items-center mr-3 px-3 py-2 text-sm font-medium text-center text-white bg-slate-500 rounded-lg hover:bg-slate-800"
-//       >
-//         {"More " + multipleSpeciesStringConverter(pet.species)}
-//         <svg
-//           aria-hidden="true"
-//           className="w-4 h-4 ml-2 -mr-1"
-//           fill="currentColor"
-//           viewBox="0 0 20 20"
-//           xmlns="http://www.w3.org/2000/svg"
-//         >
-//           <path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"></path>
-//         </svg>
-//       </Link>
-//     </button>
-
-//   </div>
-// </div>
-// </li> }}
