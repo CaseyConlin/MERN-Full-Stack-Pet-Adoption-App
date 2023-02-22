@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Carousel } from "./carousel";
+import { Carousel } from "./carousel/carousel";
 
 export const Homepage = () => {
   return (

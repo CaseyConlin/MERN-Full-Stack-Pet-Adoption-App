@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { multipleSpeciesStringConverter } from "./helpers";
+import { multipleSpeciesStringConverter } from "../helpers";
 export const CarouselItem = (pet: CarouselPet) => {
   return (
     <div

@@ -6,15 +6,15 @@ import {
 } from "react-router-dom";
 import { RootLayout } from "./components/root";
 import { Homepage } from "./components/homepage";
-import { PetSearchPage } from "./components/petSearchPage";
-import { PetPage } from "./components/petPage";
+import { PetSearchPage } from "./components/petSearch/petSearchPage";
+import { PetPage } from "./components/petSearch/petPage";
 import { ErrorPage } from "./components/error";
 import { AuthLayout } from "./context/userContext/AuthLayout";
-import { RegisterForm } from "./components/registerForm";
-import { LoginFrom } from "./components/loginForm";
-import { MyAccount } from "./components/myAccount";
-import { CartPage } from "./components/cartPage";
-import { CheckoutPage } from "./components/checkoutPage";
+import { RegisterForm } from "./components/user/registerForm";
+import { LoginFrom } from "./components/user/loginForm";
+import { MyAccount } from "./components/user/myAccount";
+import { CartPage } from "./components/checkout/cartPage";
+import { CheckoutPage } from "./components/checkout/checkoutPage";
 import { About } from "./components/about";
 import { fetchPets as petsLoader, fetchPet as petLoader } from "./services/api";
 

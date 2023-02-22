@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useLoaderData } from "react-router-dom";
-import CartContext from "../context/cartContext/cartContext";
-import { multipleSpeciesStringConverter } from "./helpers";
+import CartContext from "../../context/cartContext/cartContext";
+import { multipleSpeciesStringConverter } from "../helpers";
 
 export const PetPage = () => {
   const pet = useLoaderData() as Pet;
