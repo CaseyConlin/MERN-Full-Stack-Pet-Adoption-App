@@ -49,7 +49,16 @@ export const Navbar = () => {
               <li className="nav-item">
                 <NavLink
                   onClick={() => setNavbarOpen(false)}
-                  className="px-3 py-2 flex items-center text-s ppercase font-bold leading-snug text-white hover:no-underline"
+                  className="px-3 py-2 flex items-center text-s  leading-snug text-white hover:no-underline"
+                  to={"/about"}
+                >
+                  <span className="ml-2">About the App</span>
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  onClick={() => setNavbarOpen(false)}
+                  className="px-3 py-2 flex items-center text-s  font-bold leading-snug text-white hover:no-underline"
                   to={"pets/"}
                 >
                   <span className="ml-2">See All Pets</span>

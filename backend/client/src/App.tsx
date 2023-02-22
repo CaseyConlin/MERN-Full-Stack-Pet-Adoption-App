@@ -15,6 +15,7 @@ import { LoginFrom } from "./components/loginForm";
 import { MyAccount } from "./components/myAccount";
 import { CartPage } from "./components/cartPage";
 import { CheckoutPage } from "./components/checkoutPage";
+import { About } from "./components/about";
 import { fetchPets as petsLoader, fetchPet as petLoader } from "./services/api";
 
 export const router = createBrowserRouter(
@@ -29,6 +30,7 @@ export const router = createBrowserRouter(
         <Route path="/users/my-account" element={<MyAccount />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/about" element={<About />} />
       </Route>
     </Route>
   )

@@ -68,7 +68,7 @@ export const Homepage = () => {
         making API calls where possible.
       </p>
       <p className=" my-2 w-9/12 my-1 mx-auto text-center">
-        User authentication state is managed with React context
+        User authentication state is managed with React context.
       </p>
       <p className=" my-2 w-9/12 my-1 mx-auto text-center">
         The app is styled with Tailwind and uses Typescript.

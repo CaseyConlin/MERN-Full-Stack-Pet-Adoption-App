@@ -20,7 +20,7 @@ The shopping basket / cart is managed as state using React context in browser lo
 
 Routing is handled clientside by React Router, with useLoaderData hook making API calls where possible.
 
-User authentication state is managed with React context
+User authentication state is managed with React context.
 
 The app is styled with Tailwind and uses Typescript.
 
