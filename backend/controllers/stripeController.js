@@ -20,11 +20,11 @@ exports.payment = async (req, res) => {
     res.json({
       message: "Payment was successful",
       success: true,
+      amount,
     });
   } catch (error) {
-    console.log("Error", error);
     res.json({
-      message: "Payment Failed",
+      message: error.message,
       success: false,
     });
   }

@@ -10,21 +10,32 @@ import {
 
 export const PaymentForm = () => {
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | undefined>();
+  const [successMessage, setSuccessMessage] = useState<string | undefined>();
+  const [billedAmount, setBilledAmount] = useState<string | undefined>();
+
   const stripe = useStripe();
   const elements = useElements();
-  const { total } = useContext(CartContext);
+
+  const { total, handleCheckout } = useContext(CartContext);
 
   const stripeTotal = total * 100;
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { error, paymentMethod } = await stripe?.createPaymentMethod({
+    setError(undefined);
+
+    if (!stripe || !elements) {
+      return;
+    }
+    const card = elements.getElement(CardNumberElement);
+
+    if (card == null) {
+      return;
+    }
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
-      card: elements.getElement(
-        CardCvcElement,
-        CardExpiryElement,
-        CardNumberElement
-      ),
+      card,
     });
 
     if (!error) {
@@ -36,21 +47,29 @@ export const PaymentForm = () => {
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(transaction),
         });
-        // const response = await axios.post("http://localhost:4000/payment", {
-        //   amount: 10000,
-        //   id,
-        // });
+
         const data = await response.json();
         if (data.success) {
-          console.log(data);
-          console.log("Successful Payment");
+          setSuccessMessage("Payment successul.");
           setSuccess(true);
+          handleCheckout();
+          setBilledAmount(
+            (data.amount / 100).toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+            })
+          );
+        }
+        if (!data.success) {
+          console.log(data.message);
+          setError(data.message);
+          setSuccess(false);
         }
       } catch (error) {
         console.log("Error", error);
       }
     } else {
-      console.log(error.message);
+      setError(error.message);
     }
   };
 
@@ -62,7 +81,11 @@ export const PaymentForm = () => {
             <div className="px-3 mx-auto md:w-10/12">
               <div className="w-full mx-auto rounded-lg bg-white border border-gray-200 text-gray-800 font-light mb-6">
                 <div className="w-full p-3 border-b border-gray-200">
-                  <div className="mb-5">
+                  <div className="font-bold text-slate-800 my-3 text-xl">
+                    Basket Total:
+                    <span className="font-semibold "> ${total}</span>
+                  </div>
+                  <div className="my-5">
                     <label
                       htmlFor="type1"
                       className="flex items-center cursor-pointer"
@@ -85,6 +108,22 @@ export const PaymentForm = () => {
                     <div className="text-gray-600 font-bold text-lg mb-1">
                       Payment Info
                     </div>
+                    {error && (
+                      <div
+                        className="bg-red-100 text-center rounded-lg py-3 px-6 my-4 text-base text-red-700 mb-3"
+                        role="alert"
+                      >
+                        {error}
+                      </div>
+                    )}
+                    {successMessage && (
+                      <div
+                        className="bg-red-100 text-center rounded-lg py-3 px-6 my-4 text-base text-red-700 mb-3"
+                        role="alert"
+                      >
+                        {successMessage}
+                      </div>
+                    )}
                     <div className="mb-3">
                       <label className="text-gray-600 font-semibold text-sm mb-2 ml-1">
                         Name on card
@@ -124,39 +163,6 @@ export const PaymentForm = () => {
                         <p className="mt-2 text-sm text-blue-600 dark:text-green-500">
                           Mock exp. <span className="font-medium">future</span>
                         </p>
-                        {/* <div className="flex flex-row">
-                          <div className="w-3/5">
-                            <select className="form-select w-full px-3 py-2 mb-1 border border-gray-200 rounded-lg focus:outline-none  cursor-pointer">
-                              <option value="01">January</option>
-                              <option value="02">February</option>
-                              <option value="03">March</option>
-                              <option value="04">April</option>
-                              <option value="05">May</option>
-                              <option value="06">June</option>
-                              <option value="07">July</option>
-                              <option value="08">August</option>
-                              <option value="09">September</option>
-                              <option value="10">October</option>
-                              <option value="11">November</option>
-                              <option value="12">December</option>
-                            </select>
-                          </div>
-
-                          <div className="px-2 w-2/4">
-                            <select className="form-select w-full px-3 py-2 mb-1 border border-gray-200 rounded-lg focus:outline-none  cursor-pointer">
-                              <option value="2020">2020</option>
-                              <option value="2021">2021</option>
-                              <option value="2022">2022</option>
-                              <option value="2023">2023</option>
-                              <option value="2024">2024</option>
-                              <option value="2025">2025</option>
-                              <option value="2026">2026</option>
-                              <option value="2027">2027</option>
-                              <option value="2028">2028</option>
-                              <option value="2029">2029</option>
-                            </select>
-                          </div>
-                        </div> */}
                       </div>
                       <div className=" w-2/5 mb-3">
                         <div className=" w-full mb-3">
@@ -165,12 +171,6 @@ export const PaymentForm = () => {
                           </label>
                           <div>
                             <CardCvcElement className="w-full px-3 py-2 mb-1 border border-gray-200 rounded-lg focus:outline-none " />
-                            {/* 
-                          <input
-                            className="w-2/5 px-3 py-2 mb-1 border border-gray-200 rounded-lg focus:outline-none "
-                            placeholder="000"
-                            type="text"
-                          /> */}
                           </div>
                           <p className="mt-2 text-sm text-blue-600 dark:text-green-500">
                             Mock CVC <span className="font-medium"> 424</span>
@@ -178,6 +178,7 @@ export const PaymentForm = () => {
                         </div>
                       </div>
                     </div>
+
                     <div className="text-gray-600 font-bold text-lg mb-1">
                       Delivery Info
                     </div>
@@ -240,29 +241,16 @@ export const PaymentForm = () => {
                 </button>
               </div>
             </div>
-
-            {/* <fieldset className="FormGroup">
-            <div className="FormRow">
-              <CardNumberElement />
-            </div>
-          </fieldset>
-          <fieldset className="FormGroup">
-            <div className="FormRow">
-              <CardExpiryElement />
-            </div>
-          </fieldset>
-          <fieldset className="FormGroup">
-            <div className="FormRow">
-              <CardCvcElement />
-            </div>
-          </fieldset>
-          <button>Pay : {stripeTotal}</button> */}
           </form>
         </div>
       ) : (
-        <div className="payment-success">
-          <h2>Payment successful </h2>
-          <h3 className="Thank-you">Thank you for your patronage</h3>
+        <div className="my-5 flex flex-col items-center">
+          <h2 className="font-medium text-center leading-tight text-5xl my-5 text-slate-700">
+            Thank you for your patronage
+          </h2>
+          <h3 className="bg-green-100 text-center rounded-lg py-3 px-6 my-4 text-xl font-bold text-green-700 mb-3">
+            Payment of {billedAmount} successful.
+          </h3>
         </div>
       )}
     </>

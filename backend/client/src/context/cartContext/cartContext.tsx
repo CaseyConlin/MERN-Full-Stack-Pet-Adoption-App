@@ -4,6 +4,7 @@ const CartContext = createContext({
   cartItems: [],
   addToCart: (pet: CartPet) => {},
   removeFromCart: (pet: CartPet) => {},
+  handleCheckout: () => {},
   total: 0,
   itemCount: 0,
 });
