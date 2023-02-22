@@ -41,6 +41,13 @@ type CartPet = {
   image: string;
 };
 
+type CarouselPet = {
+  _id: string;
+  name: string;
+  species: string;
+  image: string;
+};
+
 type PetErrorType = {
   status: number;
   data: { message: string };

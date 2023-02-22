@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Carousel } from "./carousel";
+
 export const Homepage = () => {
   return (
     <div className="container mx-auto px-4">
@@ -13,6 +14,7 @@ export const Homepage = () => {
         petConnect is a demo fullstack MERN application that allows you to to
         shop for and adopt your next pet!
       </p>
+
       <Carousel />
 
       <h2 className=" mt-5 mb-3 w-10/12 text-2xl font-bold mx-auto text-center">

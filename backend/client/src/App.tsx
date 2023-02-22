@@ -22,7 +22,7 @@ export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<AuthLayout />} errorElement={<ErrorPage />}>
       <Route element={<RootLayout />}>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<Homepage />} loader={petsLoader} />
         <Route path="/pets" element={<PetSearchPage />} loader={petsLoader} />
         <Route path="/pet/:id" element={<PetPage />} loader={petLoader} />
         <Route path="/users/register" element={<RegisterForm />} />
