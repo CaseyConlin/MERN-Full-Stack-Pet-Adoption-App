@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 
-dotenv.config({ path: "../config/config" });
+dotenv.config({ path: "./config/config" });
 
 const User = require("../models/userModel");
 

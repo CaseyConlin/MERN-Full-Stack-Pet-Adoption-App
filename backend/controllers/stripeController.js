@@ -1,9 +1,7 @@
 const dotenv = require("dotenv");
-dotenv.config({ path: "../config/config" });
+dotenv.config({ path: "./config/config.env" });
 
-const stripe = require("stripe")(
-  "sk_test_51MdBykIO8F8dxGSbydIYUr45AsEbObTbJH07UUxOLu8o8F7Nlu41d4sp43Cx3y1sBGMmAXoAU9bP02fiNM0Zu5U000gZ109S0m"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 exports.payment = async (req, res) => {
   const { amount, id } = req.body;
