@@ -24,7 +24,7 @@ export const fetchPet = async ({
 };
 
 //Authorize users.
-export const registerUser = async (user: User) => {
+export const registerUser = async (user: RegisterUser) => {
   const res = await fetch("/users/register", {
     method: "POST",
     headers: { "Content-type": "application/json" },
@@ -39,7 +39,7 @@ export const registerUser = async (user: User) => {
   }
 };
 
-export const loginUser = async (user: User) => {
+export const loginUser = async (user: LoginUser) => {
   const res = await fetch("/users/login", {
     method: "POST",
     headers: { "Content-type": "application/json" },

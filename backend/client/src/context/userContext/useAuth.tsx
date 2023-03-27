@@ -43,7 +43,7 @@ export function AuthProvider({
       .finally(() => setLoadingInitial(false));
   }, []);
 
-  const register = (user: User) => {
+  const register = (user: RegisterUser) => {
     setLoading(true);
     setError(undefined);
     registerUser(user)
@@ -59,7 +59,7 @@ export function AuthProvider({
       .finally(() => setLoading(false));
   };
 
-  const login = (user: User) => {
+  const login = (user: LoginUser) => {
     setLoading(true);
     setError(undefined);
     loginUser(user)

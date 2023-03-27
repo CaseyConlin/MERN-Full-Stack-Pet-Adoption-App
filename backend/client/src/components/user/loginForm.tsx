@@ -7,7 +7,7 @@ export const LoginFrom = () => {
   const handleLogin = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form: any = e.target;
-    const userData = {
+    const userData: LoginUser = {
       email: form[0].value,
       password: form[1].value,
     };

@@ -34,7 +34,7 @@ exports.login = async (req, res) => {
   const dbUser = await User.findOne({ email: userLoggingIn.email });
   if (!dbUser) {
     return res.status(400).json({
-      message: "No username provided.",
+      message: "Username not recognized.",
     });
   }
   const isCorrect = await bcrypt.compare(

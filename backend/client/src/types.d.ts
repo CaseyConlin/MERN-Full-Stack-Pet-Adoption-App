@@ -73,9 +73,14 @@ type User = {
   _id?: string;
   message?: string;
   username?: string;
-  email?: string;
-  password?: string;
+  email: string;
+  password: string;
 };
+// type UserWithOptionalPhone = Pick<IUser, 'id' | 'email'> & Partial<IUser>
+
+type RegisterUser = Pick<User, "username" | "email" | "password">;
+
+type LoginUser = Pick<User, "email" | "password">;
 
 type AuthMessage = string;
 

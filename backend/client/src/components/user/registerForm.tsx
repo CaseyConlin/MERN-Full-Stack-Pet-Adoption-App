@@ -7,11 +7,12 @@ export const RegisterForm = () => {
   const handleRegister = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form: any = e.target;
-    const userData = {
+    const userData: RegisterUser = {
       username: form[0].value,
       email: form[1].value,
       password: form[2].value,
     };
+
     register(userData);
   };
 
