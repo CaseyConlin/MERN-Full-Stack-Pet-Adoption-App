@@ -4,7 +4,7 @@ import CartContext from "../../context/cartContext/cartContext";
 
 export const CheckoutCard = () => {
   const { total, itemCount } = useContext(CartContext);
-  console.log(itemCount);
+
   return (
     <div className="flex flex-col text-center sm:justify-self-start mx-auto  content-center   max-w-sm md:w-2/5 ">
       <div className="p-5 bg-white border border-gray-200 rounded-lg shadow">
