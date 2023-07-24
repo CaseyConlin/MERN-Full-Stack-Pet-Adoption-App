@@ -65,7 +65,7 @@ export const RegisterForm = () => {
                     to="/users/login"
                     className="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
                   >
-                    Already have an account? Login.
+                    Already have an account? Login!
                   </Link>
                 </div>
 
