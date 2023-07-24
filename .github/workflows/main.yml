@@ -17,8 +17,8 @@ jobs:
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            rm -rf test
-            mkdir test
-            cd test
-            git clone git@github.com:CaseyConlin/MERN-Full-Stack-Pet-Adoption-App.git
+            cd ../../apps/MERN-Full-Stack-Pet-Adoption-App#
+            git pull
+            npm ci
+            pm2 restart server
             echo 'Deployment to digital ocean finished'
