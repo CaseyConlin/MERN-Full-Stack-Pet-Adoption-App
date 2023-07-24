@@ -20,5 +20,5 @@ jobs:
             rm -rf test
             mkdir test
             cd test
-            git clone git@github.com:/CaseyConlin/MERN-Full-Stack-Pet-Adoption-App
+            git clone git@github.com:CaseyConlin/MERN-Full-Stack-Pet-Adoption-App.git
             echo 'Deployment to digital ocean finished'
