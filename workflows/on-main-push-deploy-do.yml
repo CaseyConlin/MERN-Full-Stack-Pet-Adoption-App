@@ -1,5 +1,5 @@
 name: Deploy to DigitalOcean Droplet
-'on':
+"on":
   push:
     branches:
       - main
@@ -20,5 +20,5 @@ jobs:
             rm -rf test
             mkdir test
             cd test
-            git clone git@github.com:username/projectname
+            git clone git@github.com:/CaseyConlin/MERN-Full-Stack-Pet-Adoption-App
             echo 'Deployment to digital ocean finished'
