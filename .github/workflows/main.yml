@@ -15,14 +15,7 @@ jobs:
           username: ${{secrets.USERNAME}}
           key: ${{secrets.KEY}}
           script: |
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
             cd /apps/MERN-Full-Stack-Pet-Adoption-App/
             git pull
-            cd backend
-            npm ci
-            cd client
-            npm ci
-            npm run build
             pm2 restart server
             echo 'Deployment to digital ocean finished'
