@@ -23,5 +23,6 @@ jobs:
             npm ci
             cd client
             npm ci
+            npm run build
             pm2 restart server
             echo 'Deployment to digital ocean finished'
