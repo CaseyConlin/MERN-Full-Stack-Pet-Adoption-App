@@ -19,6 +19,9 @@ jobs:
             source ~/.nvm/nvm.sh
             cd /apps/MERN-Full-Stack-Pet-Adoption-App/
             git pull
+            cd backend
+            npm ci
+            cd backend/client/
             npm ci
             pm2 restart server
             echo 'Deployment to digital ocean finished'
