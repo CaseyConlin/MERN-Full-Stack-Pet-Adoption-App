@@ -21,7 +21,7 @@ jobs:
             git pull
             cd backend
             npm ci
-            cd backend/client/
+            cd client
             npm ci
             pm2 restart server
             echo 'Deployment to digital ocean finished'
